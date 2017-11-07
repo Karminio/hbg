@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HotelEngine.GameLogicObj">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="HotelEngine.GameLogicObj.CellEntrance" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameLogicObj.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QAASIEAAEAAAaENAAIIIoACCJABgAACEAAgIQAAAAEI=</HashCode>
+      <FileName>GameLogicObj.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelEngine.GameLogicPersistence">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAAAAABAAAAEAAAAAAAgAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>GameLogicPersistence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelEngine.Player">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACQAAACAAAQgAAAAAACIAQAAAAAAgAAACAEwAggAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelEngine.GameCell">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAACEAAAAggAEAAAgAAEAAAAAAEAAAAAAAABA=</HashCode>
+      <FileName>GameCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelEngine.OwnershipCollection">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAQAAAAAACMAAAQAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>OwnershipCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelEngine.Ownership">
+    <Position X="7.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAACAAAAAAAAAAAAAAAAAIAAAAAQAAAAAA=</HashCode>
+      <FileName>OwnershipCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelEngine.MessageObj">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEIAAAAAAgAAAAAAAAAAAIAAAAAAABAQAAAABAAAA=</HashCode>
+      <FileName>MessageObj.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="HotelEngine.MessageTypeEnum">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAACA=</HashCode>
+      <FileName>MessageObj.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="HotelEngine.MessageButtonsEnum">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAACAABAAACAAA=</HashCode>
+      <FileName>MessageObj.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

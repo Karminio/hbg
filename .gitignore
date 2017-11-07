@@ -1,0 +1,11 @@
+# Executables
+*.exe
+*.out
+*.app
+*.lock
+Hotel/v15/
+.vs/
+*.cache
+
+*/bin/
+*/obj/
