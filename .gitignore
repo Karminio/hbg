@@ -9,3 +9,6 @@ Hotel/v15/
 
 */bin/
 */obj/
+packages/
+HotelFormApp/packages.config
+/TestResults

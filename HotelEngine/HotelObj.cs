@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -18,10 +19,12 @@ namespace HotelEngine
 
             m_CurrentCategory = 0;
             m_Owner = null;
-            m_Rate = new ArrayList();
+            m_Rate = new List<Category>();
         }
 
         #region Properties
+        public int Id { get; set; }
+        
         private string m_Name;
         public string Name
         {
@@ -63,10 +66,10 @@ namespace HotelEngine
         /// <summary>
         /// List of possible categories
         /// </summary>
-        private ArrayList m_Rate;
+        private List<Category> m_Rate;
         [XmlArray("Rates")]
         [XmlArrayItem("Rate", typeof(Category))]
-        public ArrayList Rate
+        public List<Category> Rate
         {
             get { return m_Rate; }
             set { m_Rate = value; }
@@ -136,6 +139,8 @@ namespace HotelEngine
             m_BuildingCost = buildingCost;
             m_PricePerNight = pricePerNight;
         }
+
+        public int Id { get; set; }
 
         private decimal m_BuildingCost;
         public decimal BuildingCost

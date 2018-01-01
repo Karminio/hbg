@@ -24,7 +24,7 @@ namespace HotelEngine
         {
             if (nextID <= 3 && !Exists(newPlayer.Name))
             {
-                newPlayer.ID = nextID;
+                newPlayer.Id = nextID;
                 base.Add(newPlayer);
                 nextID++;
                 return true;
@@ -37,7 +37,7 @@ namespace HotelEngine
         {
             foreach (Player item in this)
             {
-                if (item.ID == playerID)
+                if (item.Id == playerID)
                 {
                     return item;
                 }

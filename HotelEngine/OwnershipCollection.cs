@@ -115,6 +115,7 @@ namespace HotelEngine
     /// </summary>
     public class Ownership
     {
+        public int Id { get; set; }
         /// <summary>
         /// Player ID value of the owner
         /// </summary>

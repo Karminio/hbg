@@ -9,8 +9,6 @@ namespace HotelEngine
     {
         public GameCell GetCellByPosition(int position)
         {
-            GameCell returnItem = null;
-
             foreach (GameCell item in this)
             {
                 if (item.Position == position)
@@ -30,49 +28,23 @@ namespace HotelEngine
         /// cell 14 left -> 114
         /// </summary>
         /// <returns></returns>
-        public List<int> GetEntrancesPosition()
+        public List<EntrancePosition> GetEntrancesPosition()
         {
-            List<int> result = new List<int>();
+            List<EntrancePosition> result = new List<EntrancePosition>();
 
             foreach (GameCell item in this)
             {
-                if (item.Entrance == CellEntranceTypeEnum.Right)
-                {
-                    result.Add(item.Position);
-                }
-                else if (item.Entrance == CellEntranceTypeEnum.Left)
-                {
-                    result.Add(item.Position + 100);
-                }
-                else if (item.Entrance == CellEntranceTypeEnum.BothSides)
-                {
-                    result.Add(item.Position);
-                    result.Add(item.Position + 100);
-                }
+                result.Add(new EntrancePosition() { Position = item.Position, Side = item.Entrance });
             }
 
             return result;
         }
 
-        public void SetEntrancePosition(List<int> positions)
+        public void SetEntrancePosition(List<EntrancePosition> positions)
         {
-            foreach (int i in positions)
+            foreach (EntrancePosition i in positions)
             {
-                if (i < 100)
-                {
-                    if (this[i].Entrance == CellEntranceTypeEnum.None)
-                        this[i].Entrance = CellEntranceTypeEnum.Right;
-                    else
-                        this[i].Entrance = CellEntranceTypeEnum.BothSides;
-                }
-                else
-                {
-                    int j = i - 100;
-                    if (this[j].Entrance == CellEntranceTypeEnum.None)
-                        this[j].Entrance = CellEntranceTypeEnum.Left;
-                    else
-                        this[j].Entrance = CellEntranceTypeEnum.BothSides;
-                }
+                this[i.Position].Entrance = i.Side;
             }
 
         }

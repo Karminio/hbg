@@ -13,8 +13,9 @@ namespace HotelEngine
             m_activePLayerID = -1;
             m_players = new PlayerCollection();
             m_ownerShips = new OwnershipCollection();
-            m_entrancePositions = new List<int>();
         }
+
+        public int Id { get; set; }
 
         private int m_activePLayerID;
         public int ActivePlayerID
@@ -40,8 +41,6 @@ namespace HotelEngine
             set { m_ownerShips = value; }
         }
 
-        private List<int> m_entrancePositions;
-
         /// <summary>
         /// Each element indicates an entrance in the corrisponding cell number, left side of cells uses an offset of 100.
         /// Examples:
@@ -50,10 +49,6 @@ namespace HotelEngine
         /// </summary>
         [XmlArray("EntranceList")]
         [XmlArrayItem("EntrancePosition")]
-        public List<int> EntrancePositions
-        {
-            get { return m_entrancePositions; }
-            set { m_entrancePositions = value; }
-        }
+        public List<EntrancePosition> EntrancePositions{ get;  set; }
     }
 }

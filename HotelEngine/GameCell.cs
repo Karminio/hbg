@@ -12,25 +12,15 @@ namespace HotelEngine
         public GameCell(int position, CellActionTypeEnum cat, string leftHO, string rightHO)
         {
             m_position = position;
-            m_cellActionType = cat;
-            m_entrance = CellEntranceTypeEnum.None;
+            CellActionType = cat;
+            Entrance = CellEntranceTypeEnum.None;
             m_hotels[0] = leftHO;
             m_hotels[1] = rightHO;
         }
 
-        private CellActionTypeEnum m_cellActionType;
-        public CellActionTypeEnum CellAction
-        {
-            get { return m_cellActionType; }
-            set { m_cellActionType = value; }
-        }
+        public CellActionTypeEnum CellActionType { get; set; }
 
-        private CellEntranceTypeEnum m_entrance;
-        public CellEntranceTypeEnum Entrance
-        {
-            get { return m_entrance; }
-            set { m_entrance = value;  }
-        }
+        public CellEntranceTypeEnum Entrance { get; set; }
 
         /// <summary>
         /// Rispettivamente proprietà SX e DX con cui la cella confina

@@ -10,6 +10,8 @@ namespace HotelEngine
     {
         #region Properties
 
+        public int Id { get; set; }
+
         public PlayerCollection Players
         {
             get { return m_persistanceObject.Players; }
@@ -60,6 +62,7 @@ namespace HotelEngine
         { 
             m_hotelList = new HotelCollection();
 
+            // TODO: create an XML to serialize hotel data
             // President
             HotelObj hoPresident    = new HotelObj("President", 3500,   250);
             hoPresident.AddCategory(new Category(5000, 200));
@@ -189,7 +192,7 @@ namespace HotelEngine
             m_persistanceObject = new GameLogicPersistence();
 
             foreach (Player p in tempPC)
-                AddPlayer(p.Name, p.Color);
+                AddPlayer(p.Name, p.PlaceholderColor);
 
             ActivePlayerId = 0;
 
@@ -305,7 +308,7 @@ namespace HotelEngine
             foreach (HotelObj hotel in m_hotelList)
             {
                 if (hotel.Owner != null)
-                    m_persistanceObject.OwnerShips.AddOwnership(hotel, hotel.Owner.ID);
+                    m_persistanceObject.OwnerShips.AddOwnership(hotel, hotel.Owner.Id);
             }
 
             m_persistanceObject.EntrancePositions = m_cellsList.GetEntrancesPosition();
@@ -332,7 +335,11 @@ namespace HotelEngine
         #endregion
 
         #region Player's manager functions
-        public bool AddPlayer(string name, Color playerColor) 
+        public bool AddPlayer(Player p)
+        {
+            return Players.Add(p);
+        }
+        public bool AddPlayer(string name, HbgColor playerColor) 
         { 
             return Players.Add(new Player(name, "0.0.0.0", playerColor)); 
         }
@@ -344,7 +351,7 @@ namespace HotelEngine
 
             ColorConverter cc = new ColorConverter();
             Color c = (Color)cc.ConvertFromString(playerColor);
-            return Players.Add(new Player(name, "0.0.0.0", c));
+            return Players.Add(new Player(name, "0.0.0.0", new HbgColor() { CustomColor = c }));
         }
 
         public Player GetPlayerByID(int id)
@@ -527,7 +534,7 @@ namespace HotelEngine
                 }
 
                 // Final cell actions
-                p.AddAction(GetCurrentPlayerCell.CellAction);
+                p.AddAction(GetCurrentPlayerCell.CellActionType);
 
                 // Payments
                 switch (GetCurrentPlayerCell.Entrance)

@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Text;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
 using System.Xml.Serialization;
@@ -9,84 +8,63 @@ namespace HotelEngine
 {
     public class Player : IEquatable<Player>
     {
-        private ArrayList m_actions;
+        private List<CellActionTypeEnum> m_actions;
+        private string m_IPAddress;
 
         public Player()
         {
-            m_actions = new ArrayList();
+            m_actions = new List<CellActionTypeEnum>();
         }
 
-        public Player(string name, string ip, Color playerColor)
+        public Player(string name, string ip, HbgColor playerColor)
         {
-            m_name = name;
+            Name = name;
             m_IPAddress = ip;
 
-            m_Money = 15000;
-            m_CurrentPosition = -1;
+            Money = 15000;
+            m_currentPosition = -1;
             //m_CurrentPosition = 0;
 
-            m_color = playerColor;
-            m_actions = new ArrayList();
+            PlaceholderColor = playerColor;
+            m_actions = new List<CellActionTypeEnum>();
         }
 
         #region Properties
-        private string m_name;
-        public string Name
-        {
-            get { return m_name; }
-            set { m_name = value; }
-        }
-
-        private string m_IPAddress;
-
-        private Color m_color;
+        public int Id { get; set; }
+        public string Name { get; set; }
 
         [XmlIgnore]
-        public Color Color
-        {
-            get { return m_color; }
-            set { m_color = value; }
-        }
+        public HbgColor PlaceholderColor { get; set; }
 
         [XmlElement("PlayerColor")]
         public string ClrGridHtml
         {
-            get { return ColorTranslator.ToHtml(m_color); }
-            set { m_color = ColorTranslator.FromHtml(value); }
+            get { return ColorTranslator.ToHtml(PlaceholderColor.CustomColor); }
+            set { PlaceholderColor.CustomColor = ColorTranslator.FromHtml(value); }
         }
 
-        private bool m_CanBuyEntrance;
-        public bool CanBuyEntrance
-        {
-            get { return m_CanBuyEntrance; }
-            set { m_CanBuyEntrance = value; }
-        }
+        public bool CanBuyEntrance { get; set; }
 
-        private int m_CurrentPosition;
+        private int m_currentPosition;
         public int CurrentPosition
         {
-            get { return m_CurrentPosition; }
+            get { return m_currentPosition; }
             set
             {
                 // Passata la linea per ritare il premio (MONEYCELL)
-                if (m_CurrentPosition <= GameConst.MONEYCELL && value > GameConst.MONEYCELL)
-                    m_Money += GameConst.MONEYPRIZE;
+                if (m_currentPosition <= GameConst.MONEYCELL && value > GameConst.MONEYCELL)
+                    Money += GameConst.MONEYPRIZE;
 
                 // Passata la linea per acquistare ingressi (ENTRANCECELL)
-                if (m_CurrentPosition <= GameConst.ENTRANCECELL && value > GameConst.ENTRANCECELL)
+                if (m_currentPosition <= GameConst.ENTRANCECELL && value > GameConst.ENTRANCECELL)
                     CanBuyEntrance = true;
-                    //OnCanBuyEntrance();
+                //OnCanBuyEntrance();
 
-                m_CurrentPosition = value;
+                m_currentPosition = value;
             }
         }
 
-        private decimal m_Money;
-        public decimal Money
-        {
-            get { return m_Money; }
-            set { m_Money = value; }
-        }
+        public decimal Money { get; set; }
         #endregion
 
         public void AddAction(CellActionTypeEnum cat)
@@ -106,21 +84,13 @@ namespace HotelEngine
                 return CellActionTypeEnum.NoAction;
         }
 
-        private int m_ID;
-
-        public int ID
-        {
-            get { return m_ID; }
-            set { m_ID = value; }
-        }
-
         //private ArrayList m_HotelOwned;
 
         #region IEquatable<Player> Members
 
         public bool Equals(Player other)
         {
-            return (ID == other.ID);
+            return (Id == other.Id);
         }
 
         #endregion

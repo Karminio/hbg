@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Serialization;
 using HotelEngine;
-using System.IO;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Hotel
 {
@@ -54,7 +47,7 @@ namespace Hotel
 
                 GameCell gc = m_TableLogic.GetCell(i);
 
-                grid[CELLTYPE_IDX, i].Value = gc.CellAction.ToString();
+                grid[CELLTYPE_IDX, i].Value = gc.CellActionType.ToString();
 
                 if (gc.LeftHotel != null)
                 {
@@ -158,13 +151,12 @@ namespace Hotel
                     if (m_TableLogic.GetHotelByName(gc.LeftHotel).Owner == null)
                         grid[LP_IDX, i].Style.BackColor = Color.White;
                     else
-                        grid[LP_IDX, i].Style.BackColor = m_TableLogic.GetHotelByName(gc.LeftHotel).Owner.Color;
-
+                        grid[LP_IDX, i].Style.BackColor = m_TableLogic.GetHotelByName(gc.LeftHotel).Owner.PlaceholderColor.CustomColor;
                 if (gc.RightHotel != null)
                     if (m_TableLogic.GetHotelByName(gc.RightHotel).Owner == null)
                         grid[RP_IDX, i].Style.BackColor = Color.White;
                     else
-                        grid[RP_IDX, i].Style.BackColor = m_TableLogic.GetHotelByName(gc.RightHotel).Owner.Color;
+                        grid[RP_IDX, i].Style.BackColor = m_TableLogic.GetHotelByName(gc.RightHotel).Owner.PlaceholderColor.CustomColor;
 
                 #endregion
 
@@ -197,7 +189,7 @@ namespace Hotel
                 if (p.CurrentPosition > -1)
                 {
                     grid[PLAYERNO_IDX, p.CurrentPosition].Value = i;
-                    grid[PLAYERNO_IDX, p.CurrentPosition].Style.BackColor = p.Color;
+                    grid[PLAYERNO_IDX, p.CurrentPosition].Style.BackColor = p.PlaceholderColor.CustomColor;
                 }
             }
             #endregion

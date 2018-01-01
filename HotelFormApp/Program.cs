@@ -16,7 +16,7 @@ namespace HotelFormApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HotelForm());
+            Application.Run(new HotelForm());            
         }
     }
 }

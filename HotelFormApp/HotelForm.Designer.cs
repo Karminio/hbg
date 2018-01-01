@@ -38,14 +38,15 @@
             this.gameMasterControl1.Size = new System.Drawing.Size(751, 711);
             this.gameMasterControl1.TabIndex = 0;
             // 
-            // Hotel
+            // HotelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 761);
             this.Controls.Add(this.gameMasterControl1);
-            this.Name = "Hotel";
+            this.Name = "HotelForm";
             this.Text = "Hotel";
+            this.Load += new System.EventHandler(this.HotelForm_Load);
             this.ResumeLayout(false);
 
         }
