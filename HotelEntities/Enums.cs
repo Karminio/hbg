@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HotelEngine
+namespace HotelEntities
 {
     public enum CellActionTypeEnum { ParkLot, Start, CanBuild, CanBuy, CanBuyEntrance, FreeEntrance, FreeBuilding, NoAction }
     public enum CellEntranceTypeEnum { None, Left, Right, BothSides }

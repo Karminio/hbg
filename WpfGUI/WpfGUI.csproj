@@ -154,8 +154,12 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HotelEngine\HotelEntities.csproj">
+    <ProjectReference Include="..\HotelEngine\HotelEngine.csproj">
       <Project>{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}</Project>
+      <Name>HotelEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HotelEntities\HotelEntities.csproj">
+      <Project>{7b5a67b4-708b-4975-b3c3-324657eb4d45}</Project>
       <Name>HotelEntities</Name>
     </ProjectReference>
   </ItemGroup>

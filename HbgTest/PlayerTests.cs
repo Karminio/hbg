@@ -1,11 +1,12 @@
 using HotelEngine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
+using HotelEntities;
 
 namespace HbgLiveTest
 {
     [TestClass]
-    public class PlayerTest1
+    public class PlayerTests
     {
         [TestMethod]
         public void AddPlayerTest()

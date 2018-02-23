@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelEngine
+namespace HotelEntities
 {
     public class OwnedHotel
     {

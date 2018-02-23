@@ -2,6 +2,7 @@ using HotelEngine;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using HotelEntities;
 
 namespace Hotel
 {
@@ -27,12 +28,12 @@ namespace Hotel
             InitializeComponent();
         }
 
-        private GameLogicObj m_TableLogic;
+        private GameLogicObj _tableLogic;
         public GameLogicObj TableGame
         {
             set 
             {
-                m_TableLogic = value;
+                _tableLogic = value;
                 InitializeControl();
             }
         }
@@ -45,7 +46,7 @@ namespace Hotel
             {
                 grid[COLNO_IDX, i].Value = i.ToString();
 
-                GameCell gc = m_TableLogic.GetCell(i);
+                GameCell gc = _tableLogic.GetCell(i);
 
                 grid[CELLTYPE_IDX, i].Value = gc.CellActionType.ToString();
 
@@ -66,9 +67,9 @@ namespace Hotel
             pc3.PlayerID = 2;
             pc4.PlayerID = 3;
 
-            pc1.TG = pc2.TG = pc3.TG = pc4.TG = m_TableLogic;
+            pc1.TG = pc2.TG = pc3.TG = pc4.TG = _tableLogic;
 
-            guiStatus.TG = m_TableLogic;
+            guiStatus.TG = _tableLogic;
 
             UpdateControl();
         }
@@ -76,7 +77,7 @@ namespace Hotel
         private void BuyEntranceGUI(bool free)
         {
             guiStatus.Visible = false;
-            guiBuyEntrance = new GUIBuyEntrance(m_TableLogic, free);
+            guiBuyEntrance = new GUIBuyEntrance(_tableLogic, free);
             guiBuyEntrance.OnCloseGUI += new GUIBuyEntrance.CloseGUI(guiBuyEntrance_OnCloseGUI);
             guiBuyEntrance.Dock = DockStyle.Fill;
 
@@ -95,7 +96,7 @@ namespace Hotel
         private void BuildPropertyGUI()
         {
             guiStatus.Visible = false;
-            guiBuildProperty = new GUIBuildProperty(m_TableLogic);
+            guiBuildProperty = new GUIBuildProperty(_tableLogic);
             guiBuildProperty.OnCloseGUI += new GUIBuildProperty.CloseGUI(guiBuildProperty_OnCloseGUI);
             guiBuildProperty.Dock = DockStyle.Fill;
 
@@ -114,7 +115,7 @@ namespace Hotel
         private void BuyPropertyGUI()
         {
             guiStatus.Visible = false;
-            guiBuyProperty = new GUIBuyProperty(m_TableLogic);
+            guiBuyProperty = new GUIBuyProperty(_tableLogic);
             guiBuyProperty.OnCloseGUI += new GUIBuyProperty.CloseGUI(guiBP_OnCloseGUI);
             guiBuyProperty.Dock = DockStyle.Fill;
 
@@ -143,20 +144,20 @@ namespace Hotel
                 grid[RPENT_IDX, i].Style.BackColor = Color.White;
                 grid[LPENT_IDX, i].Style.BackColor = Color.White;
 
-                GameCell gc = m_TableLogic.GetCell(i);
+                GameCell gc = _tableLogic.GetCell(i);
 
                 #region Aggiorno il colore che indica il proprietario degli hotels
 
                 if (gc.LeftHotel != null)
-                    if (m_TableLogic.GetHotelByName(gc.LeftHotel).Owner == null)
+                    if (_tableLogic.GetHotelByName(gc.LeftHotel).Owner == null)
                         grid[LP_IDX, i].Style.BackColor = Color.White;
                     else
-                        grid[LP_IDX, i].Style.BackColor = m_TableLogic.GetHotelByName(gc.LeftHotel).Owner.PlaceholderColor.CustomColor;
+                        grid[LP_IDX, i].Style.BackColor = _tableLogic.GetHotelByName(gc.LeftHotel).Owner.PlaceholderColor.CustomColor;
                 if (gc.RightHotel != null)
-                    if (m_TableLogic.GetHotelByName(gc.RightHotel).Owner == null)
+                    if (_tableLogic.GetHotelByName(gc.RightHotel).Owner == null)
                         grid[RP_IDX, i].Style.BackColor = Color.White;
                     else
-                        grid[RP_IDX, i].Style.BackColor = m_TableLogic.GetHotelByName(gc.RightHotel).Owner.PlaceholderColor.CustomColor;
+                        grid[RP_IDX, i].Style.BackColor = _tableLogic.GetHotelByName(gc.RightHotel).Owner.PlaceholderColor.CustomColor;
 
                 #endregion
 
@@ -172,19 +173,19 @@ namespace Hotel
                 #region Aggiorno il livello degli Hotels
 
                 if (gc.LeftHotel != null)
-                    grid[LPLEV_IDX, i].Value = m_TableLogic.GetHotelByName(gc.LeftHotel).CurrentCategory;
+                    grid[LPLEV_IDX, i].Value = _tableLogic.GetHotelByName(gc.LeftHotel).CurrentCategory;
 
                 if (gc.RightHotel != null)
-                    grid[RPLEV_IDX, i].Value = m_TableLogic.GetHotelByName(gc.RightHotel).CurrentCategory;
+                    grid[RPLEV_IDX, i].Value = _tableLogic.GetHotelByName(gc.RightHotel).CurrentCategory;
 
                 #endregion
 
             }
 
             #region Aggiorno la posizione dei giocatori sul tabellone
-            for (int i = 0; i <= m_TableLogic.Players.Count - 1; i++)
+            for (int i = 0; i <= _tableLogic.Players.Count - 1; i++)
             {
-                Player p = m_TableLogic.GetPlayerByID(i);
+                Player p = _tableLogic.GetPlayerByID(i);
 
                 if (p.CurrentPosition > -1)
                 {
@@ -199,7 +200,7 @@ namespace Hotel
                 if (c is PlayerInfoControl)
                     ((PlayerInfoControl)c).UpdatePlayerStatus();
 
-            btSave.Enabled = m_TableLogic.CanSave;
+            btSave.Enabled = _tableLogic.CanSave;
 
             guiStatus.UpdateControl();
         }
@@ -211,14 +212,14 @@ namespace Hotel
 
         private void guiStatus_OnEndTurn()
         {
-            m_TableLogic.NextTurn();
+            _tableLogic.EndTurn();
             UpdateControl();
         }
 
         private void ExecuteNextAction()
         {
             UpdateControl();
-            Player p = m_TableLogic.GetActivePlayer();
+            Player p = _tableLogic.GetActivePlayer();
             CellActionTypeEnum cat = p.GetNextAction();
 
             switch (cat)
@@ -245,13 +246,13 @@ namespace Hotel
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            MessageObj resultMessage = m_TableLogic.SaveGameState();
+            MessageObj resultMessage = _tableLogic.SaveGameState();
             ShowMessage(resultMessage);
         }
 
         private void btLoad_Click(object sender, EventArgs e)
         {
-            MessageObj resultMessage = m_TableLogic.LoadGameState();            
+            MessageObj resultMessage = _tableLogic.LoadGameState();            
             UpdateControl();
             ShowMessage(resultMessage);
         }
@@ -259,6 +260,18 @@ namespace Hotel
         public void ShowMessage(MessageObj message)
         {
             MessageBox.Show(message.Description, message.Summary);
+        }
+
+        private void btnSimulate1Turn_Click(object sender, EventArgs e)
+        {
+            _tableLogic.SimulateTurn();
+        }
+
+        private void btnSimulate10Turns_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 10; i++) {
+                _tableLogic.SimulateTurn();
+            }
         }
     }
 }

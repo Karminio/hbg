@@ -46,7 +46,7 @@
             this.Controls.Add(this.gameMasterControl1);
             this.Name = "HotelForm";
             this.Text = "Hotel";
-            this.Load += new System.EventHandler(this.HotelForm_Load);
+            this.Load += new System.EventHandler(this.HotelFor_Load);
             this.ResumeLayout(false);
 
         }

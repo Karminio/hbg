@@ -45,12 +45,12 @@ namespace Hotel
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid = new System.Windows.Forms.DataGridView();
             this.CellNO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CellType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,13 +62,15 @@ namespace Hotel
             this.RPName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RPL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserPanel = new System.Windows.Forms.Panel();
+            this.btLoad = new System.Windows.Forms.Button();
+            this.btSave = new System.Windows.Forms.Button();
             this.guiStatus = new Hotel.GUITurnControl();
             this.pc4 = new Hotel.PlayerInfoControl();
             this.pc2 = new Hotel.PlayerInfoControl();
             this.pc3 = new Hotel.PlayerInfoControl();
             this.pc1 = new Hotel.PlayerInfoControl();
-            this.btSave = new System.Windows.Forms.Button();
-            this.btLoad = new System.Windows.Forms.Button();
+            this.btnSimulate1Turn = new System.Windows.Forms.Button();
+            this.btnSimulate10Turns = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.UserPanel.SuspendLayout();
             this.SuspendLayout();
@@ -90,14 +92,14 @@ namespace Hotel
             this.RPE,
             this.RPName,
             this.RPL});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid.DefaultCellStyle = dataGridViewCellStyle6;
             this.grid.Location = new System.Drawing.Point(269, 3);
             this.grid.Name = "grid";
             this.grid.ReadOnly = true;
@@ -128,10 +130,10 @@ namespace Hotel
             // 
             // LPLev
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.LPLev.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.LPLev.DefaultCellStyle = dataGridViewCellStyle1;
             this.LPLev.HeaderText = "Lev.";
             this.LPLev.Name = "LPLev";
             this.LPLev.ReadOnly = true;
@@ -139,8 +141,8 @@ namespace Hotel
             // 
             // LPName
             // 
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.LPName.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.LPName.DefaultCellStyle = dataGridViewCellStyle2;
             this.LPName.HeaderText = "Left property";
             this.LPName.Name = "LPName";
             this.LPName.ReadOnly = true;
@@ -154,9 +156,9 @@ namespace Hotel
             // 
             // PlayerNO
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PlayerNO.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlayerNO.DefaultCellStyle = dataGridViewCellStyle3;
             this.PlayerNO.HeaderText = "Player No.";
             this.PlayerNO.Name = "PlayerNO";
             this.PlayerNO.ReadOnly = true;
@@ -171,18 +173,18 @@ namespace Hotel
             // 
             // RPName
             // 
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.RPName.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.RPName.DefaultCellStyle = dataGridViewCellStyle4;
             this.RPName.HeaderText = "Right propery";
             this.RPName.Name = "RPName";
             this.RPName.ReadOnly = true;
             // 
             // RPL
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.RPL.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.RPL.DefaultCellStyle = dataGridViewCellStyle5;
             this.RPL.HeaderText = "Lev.";
             this.RPL.Name = "RPL";
             this.RPL.ReadOnly = true;
@@ -190,6 +192,8 @@ namespace Hotel
             // 
             // UserPanel
             // 
+            this.UserPanel.Controls.Add(this.btnSimulate10Turns);
+            this.UserPanel.Controls.Add(this.btnSimulate1Turn);
             this.UserPanel.Controls.Add(this.btLoad);
             this.UserPanel.Controls.Add(this.btSave);
             this.UserPanel.Controls.Add(this.guiStatus);
@@ -197,6 +201,26 @@ namespace Hotel
             this.UserPanel.Name = "UserPanel";
             this.UserPanel.Size = new System.Drawing.Size(744, 181);
             this.UserPanel.TabIndex = 5;
+            // 
+            // btLoad
+            // 
+            this.btLoad.Location = new System.Drawing.Point(344, 53);
+            this.btLoad.Name = "btLoad";
+            this.btLoad.Size = new System.Drawing.Size(75, 23);
+            this.btLoad.TabIndex = 2;
+            this.btLoad.Text = "Load state";
+            this.btLoad.UseVisualStyleBackColor = true;
+            this.btLoad.Click += new System.EventHandler(this.btLoad_Click);
+            // 
+            // btSave
+            // 
+            this.btSave.Location = new System.Drawing.Point(344, 23);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(75, 23);
+            this.btSave.TabIndex = 1;
+            this.btSave.Text = "Save state";
+            this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // guiStatus
             // 
@@ -212,6 +236,7 @@ namespace Hotel
             // 
             this.pc4.Location = new System.Drawing.Point(0, 255);
             this.pc4.Name = "pc4";
+            this.pc4.PlayerID = -1;
             this.pc4.Size = new System.Drawing.Size(263, 84);
             this.pc4.TabIndex = 4;
             // 
@@ -219,6 +244,7 @@ namespace Hotel
             // 
             this.pc2.Location = new System.Drawing.Point(0, 87);
             this.pc2.Name = "pc2";
+            this.pc2.PlayerID = -1;
             this.pc2.Size = new System.Drawing.Size(263, 84);
             this.pc2.TabIndex = 3;
             // 
@@ -226,6 +252,7 @@ namespace Hotel
             // 
             this.pc3.Location = new System.Drawing.Point(0, 171);
             this.pc3.Name = "pc3";
+            this.pc3.PlayerID = -1;
             this.pc3.Size = new System.Drawing.Size(263, 84);
             this.pc3.TabIndex = 2;
             // 
@@ -233,28 +260,29 @@ namespace Hotel
             // 
             this.pc1.Location = new System.Drawing.Point(0, 3);
             this.pc1.Name = "pc1";
+            this.pc1.PlayerID = -1;
             this.pc1.Size = new System.Drawing.Size(263, 84);
             this.pc1.TabIndex = 1;
             // 
-            // btSave
+            // btnSimulate1Turn
             // 
-            this.btSave.Location = new System.Drawing.Point(344, 23);
-            this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(75, 23);
-            this.btSave.TabIndex = 1;
-            this.btSave.Text = "Save state";
-            this.btSave.UseVisualStyleBackColor = true;
-            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            this.btnSimulate1Turn.Location = new System.Drawing.Point(470, 26);
+            this.btnSimulate1Turn.Name = "btnSimulate1Turn";
+            this.btnSimulate1Turn.Size = new System.Drawing.Size(173, 19);
+            this.btnSimulate1Turn.TabIndex = 3;
+            this.btnSimulate1Turn.Text = "Simulate 1 turn";
+            this.btnSimulate1Turn.UseVisualStyleBackColor = true;
+            this.btnSimulate1Turn.Click += new System.EventHandler(this.btnSimulate1Turn_Click);
             // 
-            // btLoad
+            // btnSimulate10Turns
             // 
-            this.btLoad.Location = new System.Drawing.Point(344, 53);
-            this.btLoad.Name = "btLoad";
-            this.btLoad.Size = new System.Drawing.Size(75, 23);
-            this.btLoad.TabIndex = 2;
-            this.btLoad.Text = "Load state";
-            this.btLoad.UseVisualStyleBackColor = true;
-            this.btLoad.Click += new System.EventHandler(this.btLoad_Click);
+            this.btnSimulate10Turns.Location = new System.Drawing.Point(470, 53);
+            this.btnSimulate10Turns.Name = "btnSimulate10Turns";
+            this.btnSimulate10Turns.Size = new System.Drawing.Size(173, 19);
+            this.btnSimulate10Turns.TabIndex = 4;
+            this.btnSimulate10Turns.Text = "Simulate 10 turns";
+            this.btnSimulate10Turns.UseVisualStyleBackColor = true;
+            this.btnSimulate10Turns.Click += new System.EventHandler(this.btnSimulate10Turns_Click);
             // 
             // GameMasterControl
             // 
@@ -278,5 +306,7 @@ namespace Hotel
 
         private System.Windows.Forms.Button btLoad;
         private System.Windows.Forms.Button btSave;
+        private System.Windows.Forms.Button btnSimulate10Turns;
+        private System.Windows.Forms.Button btnSimulate1Turn;
     }
 }

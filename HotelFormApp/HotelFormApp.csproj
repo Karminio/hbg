@@ -102,6 +102,8 @@
     <Reference Include="Pomelo.JsonObject, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Pomelo.JsonObject.1.1.1\lib\net451\Pomelo.JsonObject.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -177,6 +179,7 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -188,6 +191,7 @@
     <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HotelForm.cs">
@@ -235,17 +239,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HotelEngine\HotelEntities.csproj">
+    <ProjectReference Include="..\HotelEngine\HotelEngine.csproj">
       <Project>{3f0ae757-e55c-4051-bab1-b7ea84989b2e}</Project>
+      <Name>HotelEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HotelEntities\HotelEntities.csproj">
+      <Project>{7b5a67b4-708b-4975-b3c3-324657eb4d45}</Project>
       <Name>HotelEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\HotelModel\HotelModel.csproj">
       <Project>{b8bfcee6-d526-4250-b628-a64722ed7a75}</Project>
       <Name>HotelModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hotel\Hotel.csproj">
+    <ProjectReference Include="..\Hotel\HotelUIControls.csproj">
       <Project>{d8c40900-2238-4e9c-a7d7-d95a63f2af55}</Project>
-      <Name>Hotel</Name>
+      <Name>HotelUIControls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

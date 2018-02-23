@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Text;
 
-namespace HotelEngine
+namespace HotelEntities
 {
     public class GameCell
     {
@@ -11,11 +11,11 @@ namespace HotelEngine
 
         public GameCell(int position, CellActionTypeEnum cat, string leftHO, string rightHO)
         {
-            m_position = position;
+            _position = position;
             CellActionType = cat;
             Entrance = CellEntranceTypeEnum.None;
-            m_hotels[0] = leftHO;
-            m_hotels[1] = rightHO;
+            _hotels[0] = leftHO;
+            _hotels[1] = rightHO;
         }
 
         public CellActionTypeEnum CellActionType { get; set; }
@@ -25,42 +25,42 @@ namespace HotelEngine
         /// <summary>
         /// Rispettivamente proprietà SX e DX con cui la cella confina
         /// </summary>
-        //HotelObj[] m_hotels = new HotelObj[2] { null, null };
-        string[] m_hotels = new string[2] { "", "" };
+        //HotelObj[] _hotels = new HotelObj[2] { null, null };
+        string[] _hotels = new string[2] { "", "" };
 
 
         //public HotelObj[] Hotels
         //{
-        //    get { return m_hotels; }
-        //    set { m_hotels = value; }
+        //    get { return _hotels; }
+        //    set { _hotels = value; }
         //}
 
         //public HotelObj LeftHotel
         //{
-        //    get { return m_hotels[0]; }
-        //    set { m_hotels[0] = value; }
+        //    get { return _hotels[0]; }
+        //    set { _hotels[0] = value; }
         //}
         //public HotelObj RightHotel
         //{
-        //    get { return m_hotels[1]; }
-        //    set { m_hotels[1] = value; }
+        //    get { return _hotels[1]; }
+        //    set { _hotels[1] = value; }
         //}
 
         public string LeftHotel
         {
-            get { return m_hotels[0]; }
-            set { m_hotels[0] = value; }
+            get { return _hotels[0]; }
+            set { _hotels[0] = value; }
         }
         public string RightHotel
         {
-            get { return m_hotels[1]; }
-            set { m_hotels[1] = value; }
+            get { return _hotels[1]; }
+            set { _hotels[1] = value; }
         }
 
         //public bool AddEntrance(CellEntranceTypeEnum side, Player currentPlayer, bool freeEntrance)
         //{
         //    // Se esiste già l'entrata esco subito
-        //    if (m_entrance == CellEntranceTypeEnum.BothSides || m_entrance == side)
+        //    if (_entrance == CellEntranceTypeEnum.BothSides || _entrance == side)
         //        return false;
 
         //    HotelObj tempHotel = null;
@@ -77,7 +77,7 @@ namespace HotelEngine
         //        if (freeEntrance || tempHotel.Owner.Money >= tempHotel.EntranceCost)
         //        {
         //            tempHotel.Owner.Money -= tempHotel.EntranceCost;
-        //            m_entrance = side;
+        //            _entrance = side;
         //            return true;
         //        }
         //        else
@@ -87,12 +87,12 @@ namespace HotelEngine
         //        return false;
         //}
 
-        private int m_position;
+        private int _position;
 
         public int Position
         {
-            get { return m_position; }
-            set { m_position = value; }
+            get { return _position; }
+            set { _position = value; }
         }
     }
 }

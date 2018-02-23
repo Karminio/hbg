@@ -1,5 +1,6 @@
+using HotelEngine.Interfaces;
+using HotelEntities;
 using System;
-using System.Collections;
 using System.Drawing;
 using System.IO;
 using System.Xml.Serialization;
@@ -8,50 +9,57 @@ namespace HotelEngine
 {
     public class GameLogicObj
     {
+        private IHotelDataProvider _dataProvider;
+        private GameCellCollection _cellsList;
+        /// <summary>
+        /// Contains all data that need to be serialized for persistance and multiplaying game
+        /// </summary>
+        private GameLogicPersistence _persistanceObject;
+
         #region Properties
 
         public int Id { get; set; }
 
         public PlayerCollection Players
         {
-            get { return m_persistanceObject.Players; }
-            //set { m_persistanceObject.Players = value; }
+            get { return _persistanceObject.Players; }
+            //set { _persistanceObject.Players = value; }
         }
 
         public int ActivePlayerId
         {
-            get { return m_persistanceObject.ActivePlayerID; }
-            set { m_persistanceObject.ActivePlayerID = value; }
+            get { return _persistanceObject.ActivePlayerID; }
+            set { _persistanceObject.ActivePlayerID = value; }
         }
 
-        private HotelCollection m_hotelList;
+        private HotelCollection _hotelList;
 
         /// <summary>
         /// Game can be saved only between two turns, only when previous player declares "end turn" and before next player
         /// does any action.
         /// Start value is false.
         /// </summary>
-        private bool m_canSave;
+        private bool _canSave;
 
         public bool CanSave
         {
-            get { return m_canSave; }
-            //set { m_canSave = value; }
+            get { return _canSave; }
+            //set { _canSave = value; }
         }
 
         #endregion
 
         public GameLogicObj()
         {
-            /// If game is starting now no persistance object allready exists
+            /// If game is starting now no persistance object already exists
             /// Otherwise at this point the object is valorized by deserialization
-            if (m_persistanceObject == null)
-                m_persistanceObject = new GameLogicPersistence();
+            if (_persistanceObject == null)
+                _persistanceObject = new GameLogicPersistence();
 
             InitHotelList();
             InitGameScheme();
             ActivePlayerId = 0;
-            m_canSave = false;
+            _canSave = false;
         }
 
         #region Game state management
@@ -59,137 +67,143 @@ namespace HotelEngine
         /// Initialize game variables which are not serilized for persistence
         /// </summary>
         private void InitHotelList()
-        { 
-            m_hotelList = new HotelCollection();
+        {
+            _hotelList = new HotelCollection();
 
             // TODO: create an XML to serialize hotel data
             // President
-            HotelObj hoPresident    = new HotelObj("President", 3500,   250);
+            HotelObj hoPresident = new HotelObj("President", 3500, 250);
             hoPresident.AddCategory(new Category(5000, 200));
             hoPresident.AddCategory(new Category(3000, 400));
             hoPresident.AddCategory(new Category(2250, 600));
             hoPresident.AddCategory(new Category(1750, 800));
             hoPresident.AddCategory(new Category(5000, 1100));
-            m_hotelList.Add(hoPresident);
-            
+            _hotelList.Add(hoPresident);
+
             // Royal
-            HotelObj hoRoyal        = new HotelObj("Royal",     2500,   200);
+            HotelObj hoRoyal = new HotelObj("Royal", 2500, 200);
             hoRoyal.AddCategory(new Category(3600, 150));
             hoRoyal.AddCategory(new Category(2600, 300));
             hoRoyal.AddCategory(new Category(1800, 300));
             hoRoyal.AddCategory(new Category(1800, 450));
             hoRoyal.AddCategory(new Category(3000, 600));
-            m_hotelList.Add(hoRoyal);
-            
+            _hotelList.Add(hoRoyal);
+
             // Waikiki
-            HotelObj hoWaikiki      = new HotelObj("Waikiki",   250,    200);
+            HotelObj hoWaikiki = new HotelObj("Waikiki", 250, 200);
             hoWaikiki.AddCategory(new Category(3500, 200));
             hoWaikiki.AddCategory(new Category(2500, 350));
             hoWaikiki.AddCategory(new Category(2500, 500));
             hoWaikiki.AddCategory(new Category(1750, 500));
             hoWaikiki.AddCategory(new Category(1750, 650));
             hoWaikiki.AddCategory(new Category(2500, 1000));
-            m_hotelList.Add(hoWaikiki);
+            _hotelList.Add(hoWaikiki);
 
             // Safari
-            HotelObj hoSafari       = new HotelObj("Safari",    2000,   150);
+            HotelObj hoSafari = new HotelObj("Safari", 2000, 150);
             hoSafari.AddCategory(new Category(2600, 100));
             hoSafari.AddCategory(new Category(1200, 100));
             hoSafari.AddCategory(new Category(1200, 250));
             hoSafari.AddCategory(new Category(2000, 500));
-            m_hotelList.Add(hoSafari);
+            _hotelList.Add(hoSafari);
 
             // Boomerang
-            HotelObj hoBoomerang    = new HotelObj("Boomerang", 500,    100);
+            HotelObj hoBoomerang = new HotelObj("Boomerang", 500, 100);
             hoBoomerang.AddCategory(new Category(1800, 400));
             hoBoomerang.AddCategory(new Category(250, 600));
-            m_hotelList.Add(hoBoomerang);
+            _hotelList.Add(hoBoomerang);
 
             // Taj Mahal
-            HotelObj hoTajMahal     = new HotelObj("Taj Mahal", 1500,   100);
+            HotelObj hoTajMahal = new HotelObj("Taj Mahal", 1500, 100);
             hoTajMahal.AddCategory(new Category(2400, 100));
             hoTajMahal.AddCategory(new Category(1000, 100));
             hoTajMahal.AddCategory(new Category(500, 200));
             hoTajMahal.AddCategory(new Category(1000, 300));
-            m_hotelList.Add(hoTajMahal);
+            _hotelList.Add(hoTajMahal);
 
             // Fujiyama
-            HotelObj hoFujiyama     = new HotelObj("Fujiyama",  1000,   100);
+            HotelObj hoFujiyama = new HotelObj("Fujiyama", 1000, 100);
             hoFujiyama.AddCategory(new Category(2200, 100));
             hoFujiyama.AddCategory(new Category(1400, 100));
             hoFujiyama.AddCategory(new Category(1400, 200));
             hoFujiyama.AddCategory(new Category(500, 400));
-            m_hotelList.Add(hoFujiyama);
+            _hotelList.Add(hoFujiyama);
 
             // Etoile
-            HotelObj hoEtoile       = new HotelObj("L' Etoile", 3000,   250);
+            HotelObj hoEtoile = new HotelObj("L' Etoile", 3000, 250);
             hoEtoile.AddCategory(new Category(3300, 150));
             hoEtoile.AddCategory(new Category(2200, 300));
             hoEtoile.AddCategory(new Category(1800, 300));
             hoEtoile.AddCategory(new Category(1800, 300));
             hoEtoile.AddCategory(new Category(1800, 450));
             hoEtoile.AddCategory(new Category(4000, 750));
-            m_hotelList.Add(hoEtoile);
+            _hotelList.Add(hoEtoile);
 
         }
 
         private void InitGameScheme()
         {
+
+
+
             #region Getting hotel objects
             // TODO: migliorare
-            HotelObj hoPresident = m_hotelList.GetHotelByName("President");
-            HotelObj hoRoyal = m_hotelList.GetHotelByName("Royal");
-            HotelObj hoWaikiki = m_hotelList.GetHotelByName("Waikiki");
-            HotelObj hoSafari = m_hotelList.GetHotelByName("Safari");
-            HotelObj hoBoomerang = m_hotelList.GetHotelByName("Boomerang");
-            HotelObj hoTajMahal = m_hotelList.GetHotelByName("Taj Mahal");
-            HotelObj hoFujiyama = m_hotelList.GetHotelByName("Fujiyama");
-            HotelObj hoEtoile = m_hotelList.GetHotelByName("L' Etoile");
+            HotelObj hoPresident = _hotelList.GetHotelByName("President");
+            HotelObj hoRoyal = _hotelList.GetHotelByName("Royal");
+            HotelObj hoWaikiki = _hotelList.GetHotelByName("Waikiki");
+            HotelObj hoSafari = _hotelList.GetHotelByName("Safari");
+            HotelObj hoBoomerang = _hotelList.GetHotelByName("Boomerang");
+            HotelObj hoTajMahal = _hotelList.GetHotelByName("Taj Mahal");
+            HotelObj hoFujiyama = _hotelList.GetHotelByName("Fujiyama");
+            HotelObj hoEtoile = _hotelList.GetHotelByName("L' Etoile");
             #endregion
 
             #region Putting hotels into grid
-            m_cellsList = new GameCellCollection();
+            _cellsList = new GameCellCollection();
 
-            m_cellsList.Add(new GameCell(-1, CellActionTypeEnum.ParkLot, null, null));  // Park lot
-            m_cellsList.Add(new GameCell(0, CellActionTypeEnum.Start, null, null));
-            m_cellsList.Add(new GameCell(1, CellActionTypeEnum.CanBuild, null, "Fujiyama"));
-            m_cellsList.Add(new GameCell(2, CellActionTypeEnum.CanBuy, "Boomerang", "Fujiyama"));
-            m_cellsList.Add(new GameCell(3, CellActionTypeEnum.CanBuild, "Boomerang", "Fujiyama"));
-            m_cellsList.Add(new GameCell(4, CellActionTypeEnum.CanBuy, "Boomerang", "Fujiyama"));
-            m_cellsList.Add(new GameCell(5, CellActionTypeEnum.CanBuild, "Boomerang", "Fujiyama"));
-            m_cellsList.Add(new GameCell(6, CellActionTypeEnum.FreeEntrance, null, "Fujiyama"));  // Bank
-            m_cellsList.Add(new GameCell(7, CellActionTypeEnum.CanBuild, null, null));  // Bank/River
-            m_cellsList.Add(new GameCell(8, CellActionTypeEnum.CanBuy, null, "L' Etoile"));  // Bank
-            m_cellsList.Add(new GameCell(9, CellActionTypeEnum.CanBuy, "President", "L' Etoile"));
-            m_cellsList.Add(new GameCell(10, CellActionTypeEnum.FreeBuilding, "President", "L' Etoile"));
-            m_cellsList.Add(new GameCell(11, CellActionTypeEnum.CanBuy, "President", "Royal"));
-            m_cellsList.Add(new GameCell(12, CellActionTypeEnum.CanBuild, "President", "Royal"));
-            m_cellsList.Add(new GameCell(13, CellActionTypeEnum.CanBuy, "President", "Royal"));
-            m_cellsList.Add(new GameCell(14, CellActionTypeEnum.CanBuild, "President", "Royal"));
-            m_cellsList.Add(new GameCell(15, CellActionTypeEnum.CanBuy, "President", "Royal"));
-            m_cellsList.Add(new GameCell(16, CellActionTypeEnum.CanBuild, "Waikiki", "Royal"));
-            m_cellsList.Add(new GameCell(17, CellActionTypeEnum.CanBuy, "Waikiki", "Royal"));
-            m_cellsList.Add(new GameCell(18, CellActionTypeEnum.FreeEntrance, "Waikiki", "Royal"));
-            m_cellsList.Add(new GameCell(19, CellActionTypeEnum.CanBuild, "Waikiki", "Royal"));
-            m_cellsList.Add(new GameCell(20, CellActionTypeEnum.CanBuy, "Waikiki", "Royal"));
-            m_cellsList.Add(new GameCell(21, CellActionTypeEnum.CanBuy, "Taj Mahal", "L' Etoile"));
-            m_cellsList.Add(new GameCell(22, CellActionTypeEnum.CanBuild, "Taj Mahal", "L' Etoile"));
-            m_cellsList.Add(new GameCell(23, CellActionTypeEnum.CanBuy, "Taj Mahal", "L' Etoile"));
-            m_cellsList.Add(new GameCell(24, CellActionTypeEnum.FreeEntrance, "Taj Mahal", "L' Etoile"));
-            m_cellsList.Add(new GameCell(25, CellActionTypeEnum.CanBuild, "Taj Mahal", null));  // Town hall
-            m_cellsList.Add(new GameCell(26, CellActionTypeEnum.CanBuild, "Safari", null));  // Town hall
-            m_cellsList.Add(new GameCell(27, CellActionTypeEnum.CanBuild, "Safari", null));  // Town hall
-            m_cellsList.Add(new GameCell(28, CellActionTypeEnum.CanBuy, "Safari", "L' Etoile"));
-            m_cellsList.Add(new GameCell(29, CellActionTypeEnum.FreeEntrance, "Safari", "L' Etoile"));
-            m_cellsList.Add(new GameCell(30, CellActionTypeEnum.CanBuild, "Safari", null));  // River
+            _cellsList.Add(new GameCell(-1, CellActionTypeEnum.ParkLot, null, null));  // Park lot
+            _cellsList.Add(new GameCell(0, CellActionTypeEnum.Start, null, null));
+            _cellsList.Add(new GameCell(1, CellActionTypeEnum.CanBuild, null, "Fujiyama"));
+            _cellsList.Add(new GameCell(2, CellActionTypeEnum.CanBuy, "Boomerang", "Fujiyama"));
+            _cellsList.Add(new GameCell(3, CellActionTypeEnum.CanBuild, "Boomerang", "Fujiyama"));
+            _cellsList.Add(new GameCell(4, CellActionTypeEnum.CanBuy, "Boomerang", "Fujiyama"));
+            _cellsList.Add(new GameCell(5, CellActionTypeEnum.CanBuild, "Boomerang", "Fujiyama"));
+            _cellsList.Add(new GameCell(6, CellActionTypeEnum.FreeEntrance, null, "Fujiyama"));  // Bank
+            _cellsList.Add(new GameCell(7, CellActionTypeEnum.CanBuild, null, null));  // Bank/River
+            _cellsList.Add(new GameCell(8, CellActionTypeEnum.CanBuy, null, "L' Etoile"));  // Bank
+            _cellsList.Add(new GameCell(9, CellActionTypeEnum.CanBuy, "President", "L' Etoile"));
+            _cellsList.Add(new GameCell(10, CellActionTypeEnum.FreeBuilding, "President", "L' Etoile"));
+            _cellsList.Add(new GameCell(11, CellActionTypeEnum.CanBuy, "President", "Royal"));
+            _cellsList.Add(new GameCell(12, CellActionTypeEnum.CanBuild, "President", "Royal"));
+            _cellsList.Add(new GameCell(13, CellActionTypeEnum.CanBuy, "President", "Royal"));
+            _cellsList.Add(new GameCell(14, CellActionTypeEnum.CanBuild, "President", "Royal"));
+            _cellsList.Add(new GameCell(15, CellActionTypeEnum.CanBuy, "President", "Royal"));
+            _cellsList.Add(new GameCell(16, CellActionTypeEnum.CanBuild, "Waikiki", "Royal"));
+            _cellsList.Add(new GameCell(17, CellActionTypeEnum.CanBuy, "Waikiki", "Royal"));
+            _cellsList.Add(new GameCell(18, CellActionTypeEnum.FreeEntrance, "Waikiki", "Royal"));
+            _cellsList.Add(new GameCell(19, CellActionTypeEnum.CanBuild, "Waikiki", "Royal"));
+            _cellsList.Add(new GameCell(20, CellActionTypeEnum.CanBuy, "Waikiki", "Royal"));
+            _cellsList.Add(new GameCell(21, CellActionTypeEnum.CanBuy, "Taj Mahal", "L' Etoile"));
+            _cellsList.Add(new GameCell(22, CellActionTypeEnum.CanBuild, "Taj Mahal", "L' Etoile"));
+            _cellsList.Add(new GameCell(23, CellActionTypeEnum.CanBuy, "Taj Mahal", "L' Etoile"));
+            _cellsList.Add(new GameCell(24, CellActionTypeEnum.FreeEntrance, "Taj Mahal", "L' Etoile"));
+            _cellsList.Add(new GameCell(25, CellActionTypeEnum.CanBuild, "Taj Mahal", null));  // Town hall
+            _cellsList.Add(new GameCell(26, CellActionTypeEnum.CanBuild, "Safari", null));  // Town hall
+            _cellsList.Add(new GameCell(27, CellActionTypeEnum.CanBuild, "Safari", null));  // Town hall
+            _cellsList.Add(new GameCell(28, CellActionTypeEnum.CanBuy, "Safari", "L' Etoile"));
+            _cellsList.Add(new GameCell(29, CellActionTypeEnum.FreeEntrance, "Safari", "L' Etoile"));
+            _cellsList.Add(new GameCell(30, CellActionTypeEnum.CanBuild, "Safari", null));  // River*/
             #endregion
+
+            /*string JSON = JsonConvert.SerializeObject(_cellsList);
+            File.WriteAllText(@"c:\temp\savedGame.json", JSON);*/
         }
 
         public MessageObj ResetGame()
         {
             // Backup of players
             PlayerCollection tempPC = Players;
-            m_persistanceObject = new GameLogicPersistence();
+            _persistanceObject = new GameLogicPersistence();
 
             foreach (Player p in tempPC)
                 AddPlayer(p.Name, p.PlaceholderColor);
@@ -208,9 +222,9 @@ namespace HotelEngine
         public MessageObj SaveGameState()
         {
             // For debug purpose only!! =========================
-            //HotelObj h = m_hotelList.GetHotelByName("President");
+            //HotelObj h = _hotelList.GetHotelByName("President");
             //Player p = Players.GetPlayerByID(2);
-            //m_persistanceObject.OwnerShips.AddOwnership(h, p.ID);
+            //_persistanceObject.OwnerShips.AddOwnership(h, p.ID);
             // ==================================================
             MessageObj resultMessage;
             MergeDataForSave();
@@ -218,8 +232,8 @@ namespace HotelEngine
             try
             {
                 XmlSerializer ser = new XmlSerializer(typeof(GameLogicPersistence));
-                writer = new StreamWriter("GameStatus.xml");
-                ser.Serialize(writer, m_persistanceObject);
+                writer = new StreamWriter(@"c:\temp\GameStatus.xml");
+                ser.Serialize(writer, _persistanceObject);
 
                 resultMessage = new MessageObj()
                 {
@@ -255,8 +269,8 @@ namespace HotelEngine
             try
             {
                 XmlSerializer ser = new XmlSerializer(typeof(GameLogicPersistence));
-                reader = new StreamReader("GameStatus.xml");
-                m_persistanceObject = (GameLogicPersistence)ser.Deserialize(reader);
+                reader = new StreamReader(@"c:\temp\GameStatus.xml");
+                _persistanceObject = (GameLogicPersistence)ser.Deserialize(reader);
                 MergeDataForLoad();
 
                 resultMessage = new MessageObj()
@@ -291,13 +305,13 @@ namespace HotelEngine
         /// </summary>
         private void MergeDataForLoad()
         {
-            HotelCollection ownedHotels =  m_persistanceObject.OwnerShips.GetAllOwnedHotels();
+            HotelCollection ownedHotels = _persistanceObject.OwnerShips.GetAllOwnedHotels();
             foreach (HotelObj ownedHotel in ownedHotels)
             {
-                m_hotelList.OverWrite(ownedHotel);
+                _hotelList.OverWrite(ownedHotel);
             }
 
-            m_cellsList.SetEntrancePosition(m_persistanceObject.EntrancePositions);
+            _cellsList.SetEntrancePosition(_persistanceObject.EntrancePositions);
         }
 
         /// <summary>
@@ -305,13 +319,13 @@ namespace HotelEngine
         /// </summary>
         private void MergeDataForSave()
         {
-            foreach (HotelObj hotel in m_hotelList)
+            foreach (HotelObj hotel in _hotelList)
             {
                 if (hotel.Owner != null)
-                    m_persistanceObject.OwnerShips.AddOwnership(hotel, hotel.Owner.Id);
+                    _persistanceObject.OwnerShips.AddOwnership(hotel, hotel.Owner.Id);
             }
 
-            m_persistanceObject.EntrancePositions = m_cellsList.GetEntrancesPosition();
+            _persistanceObject.EntrancePositions = _cellsList.GetEntrancesPosition();
         }
 
         #endregion
@@ -320,15 +334,15 @@ namespace HotelEngine
 
         public HotelObj GetHotelByName(string name)
         {
-            return m_hotelList.GetHotelByName(name);
+            return _hotelList.GetHotelByName(name);
         }
 
-        public GameCell GetCurrentPlayerCell
+        public GameCell CurrentPlayerCell
         {
             get
             {
                 Player p = GetPlayerByID(ActivePlayerId);
-                return (GameCell)m_cellsList.GetCellByPosition(p.CurrentPosition);
+                return (GameCell)_cellsList.GetCellByPosition(p.CurrentPosition);
             }
         }
 
@@ -339,9 +353,9 @@ namespace HotelEngine
         {
             return Players.Add(p);
         }
-        public bool AddPlayer(string name, HbgColor playerColor) 
-        { 
-            return Players.Add(new Player(name, "0.0.0.0", playerColor)); 
+        public bool AddPlayer(string name, HbgColor playerColor)
+        {
+            return Players.Add(new Player(name, "0.0.0.0", playerColor));
         }
 
         public bool AddPlayer(string name, string playerColor)
@@ -366,8 +380,8 @@ namespace HotelEngine
         /// <returns>Owned hotel collection</returns>
         public HotelCollection GetOwnedProperties(Player p)
         {
-            return m_hotelList.GetOwnedProperties(p);
-            //return m_persistanceObject.OwnerShips.GetOwnedHotelsByPlayerID(p.ID);
+            return _hotelList.GetOwnedProperties(p);
+            //return _persistanceObject.OwnerShips.GetOwnedHotelsByPlayerID(p.ID);
         }
         #endregion
 
@@ -399,34 +413,29 @@ namespace HotelEngine
 
         public GameCell GetCell(int idx)
         {
-            return (GameCell)m_cellsList.GetCellByPosition(idx);
+            return (GameCell)_cellsList.GetCellByPosition(idx);
         }
         #endregion
 
-        private int RollDice(/*Player p,*/ int value)
+        /// <summary>
+        /// Generate a dice value in range {1-6}
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private int RollDice(int? value = null)
         {
-#if Debug
-#else
-            Random rd = new Random();
-            value = rd.Next(1, 7);
-#endif
+            if (!value.HasValue)
+            {
+                Random rd = new Random();
+                value = rd.Next(1, 7);
+            }
 
-            //int newPosition = Convert.Toint(p.CurrentPosition + value);
-            //newPosition = CorrectPosition(newPosition);
-
-            //while (!IsCellEmpty(newPosition))
-            //{
-            //    newPosition++;
-            //    newPosition = CorrectPosition(newPosition);
-            //}
-
-            //p.CurrentPosition = newPosition;
-
-            return value;
+            return value.Value;
         }
 
         private void MovePlayer(Player p, int value)
         {
+            // TODO: if 6 is obtained rolling dice, another roll is granted
             int newPosition = p.CurrentPosition + value;
             newPosition = (newPosition >= GameConst.LASTCELL) ? (newPosition -= GameConst.LASTCELL) : newPosition;
 
@@ -502,21 +511,27 @@ namespace HotelEngine
             }
         }
 
-        public void NextTurn()
+        public void EndTurn()
         {
             // Turno al giocatore successivo...
             ActivePlayerId++;
             if (ActivePlayerId == Players.Count)
                 ActivePlayerId = 0;
 
-            m_canSave = true;
+            _canSave = true;
         }
 
+        /// <summary>
+        /// Moves the current player of a random value {1-6} and 
+        /// queue the action(s) to the player
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public int DoTurn(int value)
         {
             try
             {
-                m_canSave = false;
+                _canSave = false;
                 Player p = GetPlayerByID(ActivePlayerId);
                 value = RollDice(value);
                 MovePlayer(p, value);
@@ -534,22 +549,23 @@ namespace HotelEngine
                 }
 
                 // Final cell actions
-                p.AddAction(GetCurrentPlayerCell.CellActionType);
+                p.AddAction(CurrentPlayerCell.CellActionType);
 
                 // Payments
-                switch (GetCurrentPlayerCell.Entrance)
+                switch (CurrentPlayerCell.Entrance)
                 {
                     case CellEntranceTypeEnum.Left:
-                        BillPayment(p, m_hotelList.GetHotelByName(GetCurrentPlayerCell.LeftHotel));
+                        BillPayment(p, _hotelList.GetHotelByName(CurrentPlayerCell.LeftHotel));
                         break;
                     case CellEntranceTypeEnum.Right:
-                        BillPayment(p, m_hotelList.GetHotelByName(GetCurrentPlayerCell.RightHotel));
+                        BillPayment(p, _hotelList.GetHotelByName(CurrentPlayerCell.RightHotel));
                         break;
                     case CellEntranceTypeEnum.BothSides:
-                        BillPayment(p, m_hotelList.GetHotelByName(GetCurrentPlayerCell.LeftHotel));
-                        BillPayment(p, m_hotelList.GetHotelByName(GetCurrentPlayerCell.RightHotel));
+                        BillPayment(p, _hotelList.GetHotelByName(CurrentPlayerCell.LeftHotel));
+                        BillPayment(p, _hotelList.GetHotelByName(CurrentPlayerCell.RightHotel));
                         break;
                 }
+
             }
             catch (Exception ex)
             {
@@ -588,7 +604,7 @@ namespace HotelEngine
         public MessageObj BuyEntrance(int cellNumber, CellEntranceTypeEnum cet)
         {
             Player p = GetPlayerByID(ActivePlayerId);
-            return AddEntrance(cet, p, false, m_cellsList.GetCellByPosition(cellNumber));
+            return AddEntrance(cet, p, false, _cellsList.GetCellByPosition(cellNumber));
         }
 
         public MessageObj AddEntrance(CellEntranceTypeEnum side, Player currentPlayer, bool freeEntrance, GameCell cell)
@@ -606,9 +622,9 @@ namespace HotelEngine
             HotelObj tempHotel = null;
 
             if (side == CellEntranceTypeEnum.Left)
-                tempHotel = m_hotelList.GetHotelByName(cell.LeftHotel);
+                tempHotel = _hotelList.GetHotelByName(cell.LeftHotel);
             else if (side == CellEntranceTypeEnum.Right)
-                tempHotel = m_hotelList.GetHotelByName(cell.RightHotel);
+                tempHotel = _hotelList.GetHotelByName(cell.RightHotel);
             else
                 return new MessageObj()
                 {
@@ -707,12 +723,6 @@ namespace HotelEngine
         {
             return Players.GetPlayerByID(ActivePlayerId);
         }
-
-        private GameCellCollection m_cellsList;
-        /// <summary>
-        /// Contains all data that need to be serialized for persistance and multiplaying game
-        /// </summary>
-        private GameLogicPersistence m_persistanceObject;
 
     }
 }

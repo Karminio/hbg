@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using HotelEngine;
+using HotelEntities;
 
 namespace Hotel
 {
@@ -15,7 +16,7 @@ namespace Hotel
         public delegate void CloseGUI();
         public event CloseGUI OnCloseGUI;
 
-        private GameLogicObj m_GameLogic;
+        private GameLogicObj _gameLogic;
 
         /// <summary>
         /// Apre l'interfaccia per il posizionamento di una nuova entrata
@@ -24,7 +25,7 @@ namespace Hotel
         public GUIBuyEntrance(GameLogicObj tableGame, bool free)
         {
             InitializeComponent();
-            m_GameLogic = tableGame;
+            _gameLogic = tableGame;
 
             if (free)
             {
@@ -37,7 +38,7 @@ namespace Hotel
         {
             // Verificare se la posizione richiesta corrisponde ad un albergo di proprietà del
             // giocatore e se non esiste già un'entrata in tale posizione
-            MessageObj resultMessage = m_GameLogic.BuyEntrance(int.Parse(txtCellNumber.Text), rbLeft.Checked ? CellEntranceTypeEnum.Left : CellEntranceTypeEnum.Right);
+            MessageObj resultMessage = _gameLogic.BuyEntrance(int.Parse(txtCellNumber.Text), rbLeft.Checked ? CellEntranceTypeEnum.Left : CellEntranceTypeEnum.Right);
             ((GameMasterControl)Parent.Parent).ShowMessage(resultMessage);
             OnCloseGUI();
         }

@@ -2,40 +2,40 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelEngine
+namespace HotelEntities
 {
     public class MessageObj
     {
-        private MessageTypeEnum m_type;
+        private MessageTypeEnum _type;
 
         public MessageTypeEnum Type
         {
-            get { return m_type; }
-            set { m_type = value; }
+            get { return _type; }
+            set { _type = value; }
         }
-        private string m_summary;
+        private string _summary;
 
         public string Summary
         {
-            get { return m_summary; }
-            set { m_summary = value; }
+            get { return _summary; }
+            set { _summary = value; }
         }
-        private string m_description;
+        private string _description;
 
         public string Description
         {
-            get { return m_description; }
-            set { m_description = value; }
+            get { return _description; }
+            set { _description = value; }
         }
         /// <summary>
         /// Buttons to be shown in the popup
         /// </summary>
-        private MessageButtonsEnum m_buttons;
+        private MessageButtonsEnum _buttons;
 
         public MessageButtonsEnum Buttons
         {
-            get { return m_buttons; }
-            set { m_buttons = value; }
+            get { return _buttons; }
+            set { _buttons = value; }
         }
     }
 

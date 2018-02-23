@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using HotelEngine;
+using HotelEntities;
 
 namespace Hotel
 {
@@ -16,7 +17,7 @@ namespace Hotel
         const int IDX_NAME = 2;
         const int IDX_IMPCOST = 3;
 
-        private GameLogicObj m_GameLogic;
+        private GameLogicObj _gameLogic;
 
         // Events
         public delegate void CloseGUI();
@@ -32,8 +33,8 @@ namespace Hotel
             :
             this()
         {
-            m_GameLogic = tableGame;
-            HotelCollection ownHotelList = m_GameLogic.GetOwnedProperties(m_GameLogic.GetActivePlayer());
+            _gameLogic = tableGame;
+            HotelCollection ownHotelList = _gameLogic.GetOwnedProperties(_gameLogic.GetActivePlayer());
 
             // TODO: troppa logica, vedere se si può spostare nell'engine
             foreach (HotelObj ob in ownHotelList)
@@ -64,11 +65,11 @@ namespace Hotel
             if (e.RowIndex < 0 || e.ColumnIndex != IDX_UPGRADEBUTTON)
                 return;
 
-            HotelObj selHotel = m_GameLogic.GetHotelByName((string)grid[IDX_NAME, e.RowIndex].Value);
+            HotelObj selHotel = _gameLogic.GetHotelByName((string)grid[IDX_NAME, e.RowIndex].Value);
             int level = (int)grid[IDX_IMPLEVEL, e.RowIndex].Value;
             decimal cost = (decimal)grid[IDX_IMPCOST, e.RowIndex].Value;
 
-            MessageObj resultMessage = m_GameLogic.UpgradeProperty(selHotel, level, cost);
+            MessageObj resultMessage = _gameLogic.UpgradeProperty(selHotel, level, cost);
             ((GameMasterControl)Parent.Parent).ShowMessage(resultMessage);
             OnCloseGUI();
         }

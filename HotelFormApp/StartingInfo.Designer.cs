@@ -45,6 +45,7 @@
             // 
             this.lbxAddedPlayers.FormattingEnabled = true;
             this.lbxAddedPlayers.Location = new System.Drawing.Point(13, 88);
+            this.lbxAddedPlayers.MultiColumn = true;
             this.lbxAddedPlayers.Name = "lbxAddedPlayers";
             this.lbxAddedPlayers.Size = new System.Drawing.Size(184, 160);
             this.lbxAddedPlayers.TabIndex = 0;
@@ -58,7 +59,6 @@
             // 
             // btAddPlayer
             // 
-            this.btAddPlayer.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btAddPlayer.Location = new System.Drawing.Point(145, 29);
             this.btAddPlayer.Name = "btAddPlayer";
             this.btAddPlayer.Size = new System.Drawing.Size(75, 20);
@@ -79,6 +79,7 @@
             // 
             // btnStartGame
             // 
+            this.btnStartGame.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnStartGame.Location = new System.Drawing.Point(203, 225);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(75, 23);

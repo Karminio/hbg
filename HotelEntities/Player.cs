@@ -4,29 +4,29 @@ using System.Drawing;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace HotelEngine
+namespace HotelEntities
 {
     public class Player : IEquatable<Player>
     {
-        private List<CellActionTypeEnum> m_actions;
-        private string m_IPAddress;
+        private List<CellActionTypeEnum> _actions;
+        private string _IPAddress;
 
         public Player()
         {
-            m_actions = new List<CellActionTypeEnum>();
+            _actions = new List<CellActionTypeEnum>();
         }
 
         public Player(string name, string ip, HbgColor playerColor)
         {
             Name = name;
-            m_IPAddress = ip;
+            _IPAddress = ip;
 
             Money = 15000;
-            m_currentPosition = -1;
-            //m_CurrentPosition = 0;
+            _currentPosition = -1;
+            //_CurrentPosition = 0;
 
             PlaceholderColor = playerColor;
-            m_actions = new List<CellActionTypeEnum>();
+            _actions = new List<CellActionTypeEnum>();
         }
 
         #region Properties
@@ -45,22 +45,22 @@ namespace HotelEngine
 
         public bool CanBuyEntrance { get; set; }
 
-        private int m_currentPosition;
+        private int _currentPosition;
         public int CurrentPosition
         {
-            get { return m_currentPosition; }
+            get { return _currentPosition; }
             set
             {
                 // Passata la linea per ritare il premio (MONEYCELL)
-                if (m_currentPosition <= GameConst.MONEYCELL && value > GameConst.MONEYCELL)
+                if (_currentPosition <= GameConst.MONEYCELL && value > GameConst.MONEYCELL)
                     Money += GameConst.MONEYPRIZE;
 
                 // Passata la linea per acquistare ingressi (ENTRANCECELL)
-                if (m_currentPosition <= GameConst.ENTRANCECELL && value > GameConst.ENTRANCECELL)
+                if (_currentPosition <= GameConst.ENTRANCECELL && value > GameConst.ENTRANCECELL)
                     CanBuyEntrance = true;
                 //OnCanBuyEntrance();
 
-                m_currentPosition = value;
+                _currentPosition = value;
             }
         }
 
@@ -69,22 +69,22 @@ namespace HotelEngine
 
         public void AddAction(CellActionTypeEnum cat)
         {
-            m_actions.Add(cat);
+            _actions.Add(cat);
         }
 
         public CellActionTypeEnum GetNextAction()
         {
-            if (m_actions.Count > 0)
+            if (_actions.Count > 0)
             {
-                CellActionTypeEnum cat = (CellActionTypeEnum)m_actions[0];
-                m_actions.RemoveAt(0);
+                CellActionTypeEnum cat = (CellActionTypeEnum)_actions[0];
+                _actions.RemoveAt(0);
                 return cat;
             }
             else
                 return CellActionTypeEnum.NoAction;
         }
 
-        //private ArrayList m_HotelOwned;
+        //private ArrayList _HotelOwned;
 
         #region IEquatable<Player> Members
 

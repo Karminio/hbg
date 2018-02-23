@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+using HotelEntities;
 
 namespace HotelEngine
 {
@@ -10,35 +8,35 @@ namespace HotelEngine
     {
         public GameLogicPersistence()
         {
-            m_activePLayerID = -1;
-            m_players = new PlayerCollection();
-            m_ownerShips = new OwnershipCollection();
+            _activePLayerID = -1;
+            _players = new PlayerCollection();
+            _ownerShips = new OwnershipCollection();
         }
 
         public int Id { get; set; }
 
-        private int m_activePLayerID;
+        private int _activePLayerID;
         public int ActivePlayerID
         {
-            get { return m_activePLayerID; }
-            set { m_activePLayerID = value; }
+            get { return _activePLayerID; }
+            set { _activePLayerID = value; }
         }
 
         [XmlArray("PlayersList")]
         [XmlArrayItem("Player")]
         public PlayerCollection Players
         {
-            get { return m_players; }
-            set { m_players = value; }
+            get { return _players; }
+            set { _players = value; }
         }
 
-        private PlayerCollection m_players;
-        private OwnershipCollection m_ownerShips;
+        private PlayerCollection _players;
+        private OwnershipCollection _ownerShips;
 
         public OwnershipCollection OwnerShips
         {
-            get { return m_ownerShips; }
-            set { m_ownerShips = value; }
+            get { return _ownerShips; }
+            set { _ownerShips = value; }
         }
 
         /// <summary>
@@ -49,6 +47,6 @@ namespace HotelEngine
         /// </summary>
         [XmlArray("EntranceList")]
         [XmlArrayItem("EntrancePosition")]
-        public List<EntrancePosition> EntrancePositions{ get;  set; }
+        public List<EntrancePosition> EntrancePositions { get; set; }
     }
 }

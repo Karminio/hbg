@@ -1,12 +1,7 @@
 ﻿using HotelEngine;
+using HotelEntities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HotelFormApp
@@ -14,9 +9,11 @@ namespace HotelFormApp
     public partial class StartingInfo : Form
     {
         private Color currentColor;
-        public GameLogicObj GameLogic { get; set; }
+        //private List<Player> players = new List<Player>();
+        private PlayerCollection players = new PlayerCollection();
+        public GameLogicObj GameLogic = new GameLogicObj();
 
-        public List<Player> players = new List<Player>();
+        //public List<Player> players = new List<Player>();
         public StartingInfo()
         {
             InitializeComponent();
@@ -24,46 +21,63 @@ namespace HotelFormApp
 
         private void btAddPlayer_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(tbPlayerName.Text)) {
-                Player p = new Player(tbPlayerName.Text, null, new HbgColor() { CustomColor = Color.Blue });
-                lbxAddedPlayers.Items.Add(tbPlayerName.Text);
+            AddPlayer();
+        }
+
+        private void AddPlayer()
+        {
+            if (!string.IsNullOrEmpty(tbPlayerName.Text))
+            {
+                Player p = new Player(tbPlayerName.Text, null, new HbgColor() { CustomColor = lbColor.BackColor });
+                players.Add(p);
+                lbxAddedPlayers.DataSource = null;
+                lbxAddedPlayers.DataSource = players;
+                lbxAddedPlayers.DisplayMember = "Name";
+                tbPlayerName.Text = "";
             }
+
+            tbPlayerName.Focus();
         }
 
         private void btnRemovePlayer_Click(object sender, EventArgs e)
         {
-
+            if (lbxAddedPlayers.SelectedItem != null)
+            {
+                players.Remove((Player)lbxAddedPlayers.SelectedItem);
+                lbxAddedPlayers.DataSource = null;
+                lbxAddedPlayers.DataSource = players;
+                lbxAddedPlayers.DisplayMember = "Name";
+            }
         }
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
             if (lbxAddedPlayers.Items.Count >= 2)
-            {
-                GameLogic = new GameLogicObj();
-
-                foreach(string player in lbxAddedPlayers.Items)
+            {                
+                foreach (Player p in lbxAddedPlayers.Items)
                 {
-                    Player p = new Player(player, null, new HbgColor() { CustomColor = Color.Blue });
                     GameLogic.AddPlayer(p);
                 }
-                
+
             }
         }
 
         private void btnPickColor_Click(object sender, EventArgs e)
         {
             DialogResult dr = colorDialog1.ShowDialog();
-            if(dr == DialogResult.OK) {
+            if (dr == DialogResult.OK)
+            {
                 currentColor = colorDialog1.Color;
                 lbColor.BackColor = currentColor;
             }
-            
-            
+
+
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }

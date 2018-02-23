@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
 
-namespace HotelEngine
+namespace HotelEntities
 {
-    public class GameCellCollection : Collection<GameCell>
+    public class GameCellCollection : List<GameCell>
     {
         public GameCell GetCellByPosition(int position)
         {

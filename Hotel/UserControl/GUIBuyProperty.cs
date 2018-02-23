@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using HotelEngine;
+using HotelEntities;
 
 namespace Hotel
 {
@@ -16,29 +17,29 @@ namespace Hotel
         const int IDX_COST = 2;
         const int IDX_OWNER = 3;
 
-        private GameLogicObj m_GameLogic;
+        private GameLogicObj _gameLogic;
 
         // Events
         public delegate void CloseGUI();
         public event CloseGUI OnCloseGUI;
 
-        private ArrayList m_alHotel;
+        private ArrayList _alHotel;
 
         public GUIBuyProperty()
         {
             InitializeComponent();
             grid.RowCount = 0;
-            m_alHotel = new ArrayList();
+            _alHotel = new ArrayList();
         }
 
         public GUIBuyProperty(GameLogicObj tableGame)
             :
             this()
         {
-            m_GameLogic = tableGame;
+            _gameLogic = tableGame;
 
-            HotelObj lHotel = m_GameLogic.GetHotelByName(m_GameLogic.GetCurrentPlayerCell.LeftHotel);
-            HotelObj rHotel = m_GameLogic.GetHotelByName(m_GameLogic.GetCurrentPlayerCell.RightHotel);
+            HotelObj lHotel = _gameLogic.GetHotelByName(_gameLogic.CurrentPlayerCell.LeftHotel);
+            HotelObj rHotel = _gameLogic.GetHotelByName(_gameLogic.CurrentPlayerCell.RightHotel);
 
             AddHotelToGrid(lHotel);
             AddHotelToGrid(rHotel);            
@@ -55,7 +56,7 @@ namespace Hotel
             grid[IDX_COST, grid.RowCount - 1].Value = h.Cost.ToString();
             grid[IDX_OWNER, grid.RowCount - 1].Value = (h.Owner != null) ? h.Owner.Name : "Nobody";
 
-            m_alHotel.Add(h);
+            _alHotel.Add(h);
         }
 
         private void btnNone_Click(object sender, EventArgs e)
@@ -69,8 +70,8 @@ namespace Hotel
             if (e.RowIndex < 0 || e.ColumnIndex != IDX_BUYBUTTON)
                 return;
 
-            HotelObj selHotel = (HotelObj)m_alHotel[e.RowIndex];
-            MessageObj resultMessage = m_GameLogic.BuyProperty(selHotel, m_GameLogic.GetActivePlayer());
+            HotelObj selHotel = (HotelObj)_alHotel[e.RowIndex];
+            MessageObj resultMessage = _gameLogic.BuyProperty(selHotel, _gameLogic.GetActivePlayer());
             ((GameMasterControl)Parent.Parent).ShowMessage(resultMessage);
             OnCloseGUI();
             

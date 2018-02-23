@@ -1,23 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using HotelEngine;
+using System;
+using System.Windows.Forms;
 
 namespace Hotel
 {
     public partial class GUITurnControl : UserControl
     {
-        private GameLogicObj m_GameLogic;
+        private GameLogicObj _gameLogic;
         public GameLogicObj TG
         {
             set
             {
-                m_GameLogic = value;
-                txtActivePlayer.Text = m_GameLogic.ActivePlayerId.ToString(); 
+                _gameLogic = value;
+                txtActivePlayer.Text = _gameLogic.ActivePlayerId.ToString();
             }
         }
 
@@ -42,7 +37,7 @@ namespace Hotel
         private void btnRoll_Click(object sender, EventArgs e)
         {
             int DiceValue = 1;
-            if(Dice.Text != string.Empty)
+            if (Dice.Text != string.Empty)
                 DiceValue = Convert.ToInt32(Dice.Text);
 
             //if (DiceValue != 6)
@@ -55,19 +50,20 @@ namespace Hotel
 
             try
             {
-                Dice.Text = m_GameLogic.DoTurn(DiceValue).ToString();
+                Dice.Text = _gameLogic.DoTurn(DiceValue).ToString();
 
                 OnExecuteActions();
             }
             catch (Exception ex)
-            { MessageBox.Show(ex.Message);
+            {
+                MessageBox.Show(ex.Message);
             }
             //OnUpdateControlRequired();
         }
 
         private void btnForceAP_Click(object sender, EventArgs e)
         {
-            m_GameLogic.ActivePlayerId = Convert.ToInt32(txtActivePlayer.Text);
+            _gameLogic.ActivePlayerId = Convert.ToInt32(txtActivePlayer.Text);
         }
 
         private void btnEndTurn_Click(object sender, EventArgs e)
@@ -82,12 +78,12 @@ namespace Hotel
         /// </summary>
         public void UpdateControl()
         {
-            txtActivePlayer.Text = m_GameLogic.ActivePlayerId.ToString(); 
+            txtActivePlayer.Text = _gameLogic.ActivePlayerId.ToString();
         }
 
         private void btReset_Click(object sender, EventArgs e)
         {
-            m_GameLogic.ResetGame();
+            _gameLogic.ResetGame();
             OnUpdateControlRequired();
         }
 

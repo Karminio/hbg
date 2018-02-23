@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using HotelEngine;
+using HotelEntities;
 using System.Collections.ObjectModel;
 using System.Collections;
 
-namespace HotelEngine
+namespace HotelEntities
 {
     public class OwnershipCollection : Collection<Ownership>
     {
@@ -119,18 +119,18 @@ namespace HotelEngine
         /// <summary>
         /// Player ID value of the owner
         /// </summary>
-        private int m_ownerID;
+        private int _ownerID;
         public int OwnerID
         {
-            get { return m_ownerID; }
-            set { m_ownerID = value; }
+            get { return _ownerID; }
+            set { _ownerID = value; }
         }
 
-        private HotelObj m_hotel;
+        private HotelObj _hotel;
         public HotelObj Hotel
         {
-            get { return m_hotel; }
-            set { m_hotel = value; }
+            get { return _hotel; }
+            set { _hotel = value; }
         }
     }
 

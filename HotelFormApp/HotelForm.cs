@@ -11,7 +11,7 @@ namespace HotelFormApp
             InitializeComponent();
         }
 
-        private void HotelForm_Load(object sender, EventArgs e)
+        private void HotelFor_Load(object sender, EventArgs e)
         {
             StartingInfo newGameModal = new StartingInfo();  
             DialogResult dr = newGameModal.ShowDialog();
@@ -19,6 +19,7 @@ namespace HotelFormApp
             if (dr == DialogResult.OK)
             {
                 GameLogicObj gameLogic = newGameModal.GameLogic;
+                gameMasterControl1.TableGame = gameLogic;
             }
             else {
                 Close();

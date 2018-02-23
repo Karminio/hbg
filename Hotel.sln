@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel", "Hotel\Hotel.csproj", "{D8C40900-2238-4E9C-A7D7-D95A63F2AF55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelUIControls", "Hotel\HotelUIControls.csproj", "{D8C40900-2238-4E9C-A7D7-D95A63F2AF55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelEntities", "HotelEngine\HotelEntities.csproj", "{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelEngine", "HotelEngine\HotelEngine.csproj", "{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGUI", "WpfGUI\WpfGUI.csproj", "{3E985D97-149B-4171-B32B-147CFA77FEBD}"
 EndProject
@@ -14,6 +14,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelModel", "HotelModel\HotelModel.csproj", "{B8BFCEE6-D526-4250-B628-A64722ED7A75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbgTest", "HbgTest\HbgTest.csproj", "{82AB8D35-4DAA-4F8E-9584-F596EBE5F46F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelExtensionMethods", "HotelExtensionMethods\HotelExtensionMethods.csproj", "{07C0E512-809E-4358-9805-E5B0FE79C4FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelEntities", "HotelEntities\HotelEntities.csproj", "{7B5A67B4-708B-4975-B3C3-324657EB4D45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelJSONProvider", "HotelJSONProvider\HotelJSONProvider.csproj", "{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,13 +74,37 @@ Global
 		{82AB8D35-4DAA-4F8E-9584-F596EBE5F46F}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
 		{82AB8D35-4DAA-4F8E-9584-F596EBE5F46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82AB8D35-4DAA-4F8E-9584-F596EBE5F46F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.GTKDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
+		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.GTKDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
+		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.GTKDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {DB59E465-D0EF-4D97-AFDD-11083F6A27A1}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = HotelUnitTest\HotelUnitTest.csproj

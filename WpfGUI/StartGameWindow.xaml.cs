@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using HotelEngine;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using HotelEngine;
 
 namespace WpfGUI
 {
@@ -36,7 +26,7 @@ namespace WpfGUI
                 return;
             }
 
-            if(!theLogic.AddPlayer(txtPlayerName.Text, "Red"))
+            if (!theLogic.AddPlayer(txtPlayerName.Text, "Red"))
             {
                 MessageBox.Show("A player with this name has already been defined");
                 return;
@@ -49,7 +39,7 @@ namespace WpfGUI
         {
             string name = ((RadioButton)sender).Name;
 
-            if(name.Equals("rbSolo"))
+            if (name.Equals("rbSolo"))
             {
                 tabLAN.IsEnabled = false;
                 tabInternet.IsEnabled = false;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace HotelEngine
+namespace HotelEntities
 {
     public class HotelObj
     {
@@ -13,72 +13,72 @@ namespace HotelEngine
 
         public HotelObj(string name, decimal cost, decimal entranceCost)
         {
-            m_Name = name;
-            m_Cost = cost;
-            m_EntranceCost = entranceCost;
+            _Name = name;
+            _Cost = cost;
+            _EntranceCost = entranceCost;
 
-            m_CurrentCategory = 0;
-            m_Owner = null;
-            m_Rate = new List<Category>();
+            _CurrentCategory = 0;
+            _Owner = null;
+            _Rate = new List<Category>();
         }
 
         #region Properties
         public int Id { get; set; }
         
-        private string m_Name;
+        private string _Name;
         public string Name
         {
-            get { return m_Name; }
-            set { m_Name = value; }
+            get { return _Name; }
+            set { _Name = value; }
         }
 
-        private decimal m_Cost;
+        private decimal _Cost;
         public decimal Cost
         {
-            get { return m_Cost; }
-            set { m_Cost = value; }
+            get { return _Cost; }
+            set { _Cost = value; }
         }
 
-        private decimal m_EntranceCost;
+        private decimal _EntranceCost;
         public decimal EntranceCost
         {
-            get { return m_EntranceCost; }
-            set { m_EntranceCost = value; }
+            get { return _EntranceCost; }
+            set { _EntranceCost = value; }
         }
 
-        private int m_CurrentCategory;
+        private int _CurrentCategory;
         public int CurrentCategory
         {
-            get { return m_CurrentCategory; }
-            set { m_CurrentCategory = value; }
+            get { return _CurrentCategory; }
+            set { _CurrentCategory = value; }
         }
 
         /// <summary>
         /// Proprietario della Struttura
         /// </summary>
-        private Player m_Owner;
+        private Player _Owner;
         public Player Owner
         {
-            get { return m_Owner; }
-            set { m_Owner = value; }
+            get { return _Owner; }
+            set { _Owner = value; }
         }
 
         /// <summary>
         /// List of possible categories
         /// </summary>
-        private List<Category> m_Rate;
+        private List<Category> _Rate;
         [XmlArray("Rates")]
         [XmlArrayItem("Rate", typeof(Category))]
         public List<Category> Rate
         {
-            get { return m_Rate; }
-            set { m_Rate = value; }
+            get { return _Rate; }
+            set { _Rate = value; }
         }
         #endregion
 
         public int MaxCategory
         {
-            get { return (int)(m_Rate.Count - 1); }
+            get { return (int)(_Rate.Count - 1); }
         }
 
         /// <summary>
@@ -87,24 +87,24 @@ namespace HotelEngine
 
         public Category GetRate(int idx)
         {
-            return (Category) m_Rate[idx];
+            return (Category) _Rate[idx];
         }
 
         public Category GetCurrentRate()
         {
-            return (Category)m_Rate[m_CurrentCategory];
+            return (Category)_Rate[_CurrentCategory];
         }
 
         /// <summary>
         /// Utilizzata per inizializzare la tabella listini/categorie degli hotel
         /// </summary>
         /// <param name="c">Oggetto di tipo Categoria</param>
-        public void AddCategory(Category c) { m_Rate.Add(c); }
+        public void AddCategory(Category c) { _Rate.Add(c); }
 
         /// <summary>
         /// Utilizzata per impostare il costo della proprietà al 50% dopo il primo acquisto
         /// </summary>
-        public void SetExpropriationCost() {m_Cost /= 2;}
+        public void SetExpropriationCost() {_Cost /= 2;}
 
         public bool CanHaveEntrance()
         {
@@ -113,10 +113,10 @@ namespace HotelEngine
 
         public bool UpgradeCategory(Player currentPlayer, int requestedCategory, decimal cost)
         {
-            if (m_Owner == currentPlayer && currentPlayer.Money >= cost)
+            if (_Owner == currentPlayer && currentPlayer.Money >= cost)
             {
                 currentPlayer.Money -= cost;
-                m_CurrentCategory = requestedCategory;
+                _CurrentCategory = requestedCategory;
                 return true;
             }
             else
@@ -136,24 +136,24 @@ namespace HotelEngine
 
         public Category(decimal buildingCost, decimal pricePerNight)
         {
-            m_BuildingCost = buildingCost;
-            m_PricePerNight = pricePerNight;
+            _BuildingCost = buildingCost;
+            _PricePerNight = pricePerNight;
         }
 
         public int Id { get; set; }
 
-        private decimal m_BuildingCost;
+        private decimal _BuildingCost;
         public decimal BuildingCost
         {
-            get { return m_BuildingCost; }
-            set { m_BuildingCost = value; }
+            get { return _BuildingCost; }
+            set { _BuildingCost = value; }
         }
 
-        private decimal m_PricePerNight;
+        private decimal _PricePerNight;
         public decimal PricePerNight
         {
-            get { return m_PricePerNight; }
-            set { m_PricePerNight = value; }
+            get { return _PricePerNight; }
+            set { _PricePerNight = value; }
         }
     }
 }

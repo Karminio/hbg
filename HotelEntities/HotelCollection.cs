@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
 
-namespace HotelEngine
+namespace HotelEntities
 {
     public class HotelCollection : Collection<HotelObj>
     {
         public HotelObj GetHotelByName(string name)
         {
-            HotelObj returnItem = null;
-
             foreach (HotelObj item in this)
             {
                 if (item.Name == name)
