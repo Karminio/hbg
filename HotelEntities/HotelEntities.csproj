@@ -29,6 +29,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>HotelEntities.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -49,12 +55,16 @@
     <Compile Include="HbgColor.cs" />
     <Compile Include="HotelCollection.cs" />
     <Compile Include="HotelObj.cs" />
+    <Compile Include="Interfaces\IHotelDataProvider.cs" />
     <Compile Include="MessageObj.cs" />
     <Compile Include="OwnedHotel.cs" />
     <Compile Include="OwnershipCollection.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="HotelEntities.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

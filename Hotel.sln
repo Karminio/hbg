@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelUIControls", "Hotel\Ho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelEngine", "HotelEngine\HotelEngine.csproj", "{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGUI", "WpfGUI\WpfGUI.csproj", "{3E985D97-149B-4171-B32B-147CFA77FEBD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelFormApp", "HotelFormApp\HotelFormApp.csproj", "{7E629505-FD67-4326-993B-14337C3CAEC2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelModel", "HotelModel\HotelModel.csproj", "{B8BFCEE6-D526-4250-B628-A64722ED7A75}"
@@ -20,6 +18,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelEntities", "HotelEntities\HotelEntities.csproj", "{7B5A67B4-708B-4975-B3C3-324657EB4D45}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelJSONProvider", "HotelJSONProvider\HotelJSONProvider.csproj", "{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.WPFGUI", "Hotel.WPFGUI\Hotel.WPFGUI.csproj", "{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.FixedProvider", "Hotel.FixedProvider\Hotel.FixedProvider.csproj", "{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{E6F2253F-DED5-43C8-A5BA-431E7682927E}"
+	ProjectSection(SolutionItems) = preProject
+		register_dlls_GAC.bat = register_dlls_GAC.bat
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,14 +49,6 @@ Global
 		{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}.GTKDebug|Any CPU.Build.0 = GTKDebug|Any CPU
 		{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E985D97-149B-4171-B32B-147CFA77FEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E985D97-149B-4171-B32B-147CFA77FEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E985D97-149B-4171-B32B-147CFA77FEBD}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E985D97-149B-4171-B32B-147CFA77FEBD}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{3E985D97-149B-4171-B32B-147CFA77FEBD}.GTKDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E985D97-149B-4171-B32B-147CFA77FEBD}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
-		{3E985D97-149B-4171-B32B-147CFA77FEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E985D97-149B-4171-B32B-147CFA77FEBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E629505-FD67-4326-993B-14337C3CAEC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7E629505-FD67-4326-993B-14337C3CAEC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E629505-FD67-4326-993B-14337C3CAEC2}.Default|Any CPU.ActiveCfg = Debug|Any CPU
@@ -98,13 +97,29 @@ Global
 		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
 		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}.GTKDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
+		{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.GTKDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
+		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DB59E465-D0EF-4D97-AFDD-11083F6A27A1}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {DB59E465-D0EF-4D97-AFDD-11083F6A27A1}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = HotelUnitTest\HotelUnitTest.csproj

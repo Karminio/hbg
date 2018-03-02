@@ -1,11 +1,12 @@
-﻿using HotelEntities;
+﻿using HotelEntities.Interfaces;
+using HotelEntities;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.IO;
 
 namespace HotelJSONDataProvider
 {
-    public class HotelJSONDataProvider
+    public class HotelJSONDataProvider : IHotelDataProvider
     {
         public GameCellCollection RetrieveGameCellCollection()
         {
@@ -14,6 +15,15 @@ namespace HotelJSONDataProvider
             GameCellCollection gcc = JsonConvert.DeserializeObject(JSON) as GameCellCollection;
 
             return gcc;
+        }
+
+        public HotelCollection RetrieveHotelCollection()
+        {
+            string filePath = ConfigurationManager.AppSettings.Get("PersistenceFilePath");
+            string JSON = File.ReadAllText(filePath);
+            HotelCollection hc = JsonConvert.DeserializeObject(JSON) as HotelCollection;
+
+            return hc;
         }
     }
 }

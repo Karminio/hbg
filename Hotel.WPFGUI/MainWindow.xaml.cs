@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,33 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HotelEngine;
 
-namespace WpfGUI
+namespace WpfApp1
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class MainWindow : Window
     {
-        GameLogicObj theLogic;
-
-        public Window1()
+        public MainWindow()
         {
             InitializeComponent();
-            StartGame();
         }
-
-        private void StartGame()
-        {
-            theLogic = new GameLogicObj();
-
-            StartGameWindow sgw = new StartGameWindow(theLogic);
-            sgw.ShowDialog();
-
-        }
-
-
-
     }
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}</ProjectGuid>
+    <ProjectGuid>{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HotelJSONProvider</RootNamespace>
-    <AssemblyName>HotelJSONProvider</AssemblyName>
+    <RootNamespace>Hotel.FixedProvider</RootNamespace>
+    <AssemblyName>Hotel.FixedProvider</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,12 +33,10 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>HotelJSON.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Hotel.FixedProvider.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,21 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HotelJSONDataProvider.cs" />
+    <Compile Include="HotelFixedProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HotelEngine\HotelEngine.csproj">
-      <Project>{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}</Project>
-      <Name>HotelEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HotelEntities\HotelEntities.csproj">
       <Project>{7b5a67b4-708b-4975-b3c3-324657eb4d45}</Project>
       <Name>HotelEntities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="HotelJSON.snk" />
+    <None Include="Hotel.FixedProvider.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
