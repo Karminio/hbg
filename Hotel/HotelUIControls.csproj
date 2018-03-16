@@ -201,6 +201,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hotel.ExtendedMethods\Hotel.ExtendedMethods.csproj">
+      <Project>{b320e1a2-efbe-4f94-b787-8976560143ac}</Project>
+      <Name>Hotel.ExtendedMethods</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HotelEngine\HotelEngine.csproj">
       <Project>{3F0AE757-E55C-4051-BAB1-B7EA84989B2E}</Project>
       <Name>HotelEngine</Name>
@@ -208,10 +212,6 @@
     <ProjectReference Include="..\HotelEntities\HotelEntities.csproj">
       <Project>{7b5a67b4-708b-4975-b3c3-324657eb4d45}</Project>
       <Name>HotelEntities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HotelExtensionMethods\HotelExtensionMethods.csproj">
-      <Project>{07c0e512-809e-4358-9805-e5b0fe79c4fd}</Project>
-      <Name>HotelExtensionMethods</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,4 @@
-﻿using HotelEngine;
-using HotelEntities;
+﻿using HotelEntities;
 using System;
 
 namespace HotelEngine
@@ -49,7 +48,7 @@ namespace HotelEngine
                     break;
             }
 
-            Console.WriteLine("Action log: {0} - {1}",resultMessage.Summary, resultMessage.Description);
+            Console.WriteLine("Action log: {0} - {1}", resultMessage.Summary, resultMessage.Description);
 
             gameLogic.EndTurn();
         }

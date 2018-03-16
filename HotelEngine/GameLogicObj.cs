@@ -1,19 +1,18 @@
 using HotelEntities;
+using HotelEntities.Interfaces;
+using Microsoft.Practices.Unity.Configuration;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Unity;
-using Microsoft.Practices.Unity.Configuration;
-using HotelEntities.Interfaces;
-using Hotel.FixedProvider;
 
 namespace HotelEngine
 {
     public class GameLogicObj
     {
         IUnityContainer _container;
-        private IHotelDataProvider _dataProvider;
         private GameCellCollection _cellsList;
         /// <summary>
         /// Contains all data that need to be serialized for persistance and multiplaying game
@@ -65,11 +64,21 @@ namespace HotelEngine
 
             _container = new UnityContainer();
             _container.LoadConfiguration();
-            //_container.RegisterType<IHotelDataProvider, HotelFixedProvider>();
+            //_container.RegisterType<IHotelDataProvider, HotelJSONDataProvider.HotelJSONDataProvider>();
             IHotelDataProvider dataProvider = _container.Resolve<IHotelDataProvider>();
 
-            _hotelList = dataProvider.RetrieveHotelCollection();
-            _cellsList = dataProvider.RetrieveGameCellCollection();
+            Action<object> retrieveListsAction = (object obj) =>
+            {
+                Console.WriteLine("=== Starting task {0} ===", obj.ToString());
+                DateTime start = DateTime.Now;
+                _hotelList = dataProvider.RetrieveHotelCollection();
+                _cellsList = dataProvider.RetrieveGameCellCollection();
+                TimeSpan ts = DateTime.Now - start;
+                Console.WriteLine("=== Hotel and cell lists retrieved!! In {0} ===", ts.ToString());
+            };
+
+            Task getLists = new Task(retrieveListsAction, "retrieveLists");
+            getLists.Start();
 
             ActivePlayerId = 0;
             _canSave = false;
@@ -221,6 +230,14 @@ namespace HotelEngine
             {
                 Player p = GetPlayerByID(ActivePlayerId);
                 return (GameCell)_cellsList.GetCellByPosition(p.CurrentPosition);
+            }
+        }
+
+        public int NumberOfCells
+        {
+            get
+            {
+                return (_cellsList == null) ? 0 : _cellsList.Count;
             }
         }
 

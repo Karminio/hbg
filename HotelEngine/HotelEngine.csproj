@@ -125,6 +125,10 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Threading.Thread">
+      <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.7.1\lib\net47\Unity.Abstractions.dll</HintPath>
@@ -185,6 +189,10 @@
     <ProjectReference Include="..\HotelEntities\HotelEntities.csproj">
       <Project>{7b5a67b4-708b-4975-b3c3-324657eb4d45}</Project>
       <Name>HotelEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HotelJSONProvider\Hotel.JSONProvider.csproj">
+      <Project>{f4a7ac66-6e40-4a18-b03d-ad7b6a6d15f7}</Project>
+      <Name>Hotel.JSONProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

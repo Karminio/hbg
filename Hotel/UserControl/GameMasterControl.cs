@@ -40,9 +40,10 @@ namespace Hotel
 
         private void InitializeControl()
         {
-            grid.RowCount = GameConst.LASTCELL;
+            int numberOfCells = _tableLogic.NumberOfCells - 1; // -1 because the first cell is the park lot and has position -1 
+            grid.RowCount = numberOfCells;
 
-            for (int i = 0; i < GameConst.LASTCELL; i++)
+            for (int i = 0; i < numberOfCells; i++)
             {
                 grid[COLNO_IDX, i].Value = i.ToString();
 
@@ -137,7 +138,9 @@ namespace Hotel
         /// </summary>
         public void UpdateControl()
         {
-            for (int i = 0; i < GameConst.LASTCELL; i++)
+            int numberOfCells = _tableLogic.NumberOfCells - 1; // -1 because the first cell is the park lot and has position -1 
+
+            for (int i = 0; i < numberOfCells; i++)
             {
                 grid[PLAYERNO_IDX, i].Value = string.Empty;
                 grid[PLAYERNO_IDX, i].Style.BackColor = Color.White;

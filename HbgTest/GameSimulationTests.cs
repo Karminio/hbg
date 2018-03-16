@@ -7,7 +7,7 @@ using System.Drawing;
 namespace HbgTest
 {
     [TestClass]
-    public class GameSimulation
+    public class GameSimulationTests
     {
         [TestMethod]
         public void StartGameTest()
@@ -49,22 +49,24 @@ namespace HbgTest
             gameLogic.AddPlayer("Quo", "Green");
             gameLogic.AddPlayer("Qua", new HbgColor { CustomColor = Color.Blue });
 
-            for(int i = 0; i<10; i++) {
+            for (int i = 0; i < 10; i++)
+            {
                 //ExecuteTurnActions(gameLogic);
                 gameLogic.SimulateTurn();
             }
-            
+
         }
 
-        private static void ExecuteTurnActions(GameLogicObj gameLogic) {
+        private static void ExecuteTurnActions(GameLogicObj gameLogic)
+        {
             gameLogic.DoTurn(0);
             Player p = gameLogic.GetActivePlayer();
             if (p.CanBuyEntrance)
             {
                 Console.WriteLine("Player {0} can buy entrance", p.Name);
             }
-       
+
             gameLogic.EndTurn();
-        } 
+        }
     }
 }

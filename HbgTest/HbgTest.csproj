@@ -53,14 +53,21 @@
   <ItemGroup>
     <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameSimulation.cs" />
+    <Compile Include="GameSimulationTests.cs" />
     <Compile Include="GameLogicTests.cs" />
-    <Compile Include="GamePersistence.cs" />
+    <Compile Include="GamePersistenceTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hotel.ExtendedMethods\Hotel.ExtendedMethods.csproj">
+      <Project>{b320e1a2-efbe-4f94-b787-8976560143ac}</Project>
+      <Name>Hotel.ExtendedMethods</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hotel.FixedProvider\Hotel.FixedProvider.csproj">
       <Project>{ec3e63d7-d4d0-4bca-98b0-7b98f0246167}</Project>
       <Name>Hotel.FixedProvider</Name>
@@ -73,9 +80,9 @@
       <Project>{7b5a67b4-708b-4975-b3c3-324657eb4d45}</Project>
       <Name>HotelEntities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HotelExtensionMethods\HotelExtensionMethods.csproj">
-      <Project>{07c0e512-809e-4358-9805-e5b0fe79c4fd}</Project>
-      <Name>HotelExtensionMethods</Name>
+    <ProjectReference Include="..\HotelJSONProvider\Hotel.JSONProvider.csproj">
+      <Project>{f4a7ac66-6e40-4a18-b03d-ad7b6a6d15f7}</Project>
+      <Name>Hotel.JSONProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

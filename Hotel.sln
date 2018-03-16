@@ -13,11 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelModel", "HotelModel\Ho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbgTest", "HbgTest\HbgTest.csproj", "{82AB8D35-4DAA-4F8E-9584-F596EBE5F46F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelExtensionMethods", "HotelExtensionMethods\HotelExtensionMethods.csproj", "{07C0E512-809E-4358-9805-E5B0FE79C4FD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelEntities", "HotelEntities\HotelEntities.csproj", "{7B5A67B4-708B-4975-B3C3-324657EB4D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelJSONProvider", "HotelJSONProvider\HotelJSONProvider.csproj", "{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.JSONProvider", "HotelJSONProvider\Hotel.JSONProvider.csproj", "{F4A7AC66-6E40-4A18-B03D-AD7B6A6D15F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.WPFGUI", "Hotel.WPFGUI\Hotel.WPFGUI.csproj", "{63BE9A82-88A5-4B33-8793-37F0F1DA61F6}"
 EndProject
@@ -27,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		register_dlls_GAC.bat = register_dlls_GAC.bat
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.ExtendedMethods", "Hotel.ExtendedMethods\Hotel.ExtendedMethods.csproj", "{B320E1A2-EFBE-4F94-B787-8976560143AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,14 +73,6 @@ Global
 		{82AB8D35-4DAA-4F8E-9584-F596EBE5F46F}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
 		{82AB8D35-4DAA-4F8E-9584-F596EBE5F46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82AB8D35-4DAA-4F8E-9584-F596EBE5F46F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.GTKDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
-		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07C0E512-809E-4358-9805-E5B0FE79C4FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B5A67B4-708B-4975-B3C3-324657EB4D45}.Default|Any CPU.ActiveCfg = Debug|Any CPU
@@ -113,13 +105,21 @@ Global
 		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
 		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B320E1A2-EFBE-4F94-B787-8976560143AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B320E1A2-EFBE-4F94-B787-8976560143AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B320E1A2-EFBE-4F94-B787-8976560143AC}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{B320E1A2-EFBE-4F94-B787-8976560143AC}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{B320E1A2-EFBE-4F94-B787-8976560143AC}.GTKDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B320E1A2-EFBE-4F94-B787-8976560143AC}.GTKDebug|Any CPU.Build.0 = Debug|Any CPU
+		{B320E1A2-EFBE-4F94-B787-8976560143AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B320E1A2-EFBE-4F94-B787-8976560143AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {DB59E465-D0EF-4D97-AFDD-11083F6A27A1}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = HotelUnitTest\HotelUnitTest.csproj

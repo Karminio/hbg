@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hotel\HotelUIControls.csproj" />
+    <ProjectReference Include="..\HotelEngine\HotelEngine.csproj" />
   </ItemGroup>
 
 </Project>

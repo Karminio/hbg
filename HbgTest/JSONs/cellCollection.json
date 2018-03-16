@@ -1,0 +1,23 @@
+[
+   {
+      "CellActionType":0,
+      "Entrance":0,
+      "LeftHotel":null,
+      "RightHotel":null,
+      "Position":-1
+   },
+   {
+      "CellActionType":1,
+      "Entrance":0,
+      "LeftHotel":null,
+      "RightHotel":null,
+      "Position":0
+   },
+   {
+      "CellActionType":2,
+      "Entrance":0,
+      "LeftHotel":null,
+      "RightHotel":"Fujiyama",
+      "Position":1
+   }
+]

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC3E63D7-D4D0-4BCA-98B0-7B98F0246167}</ProjectGuid>
+    <ProjectGuid>{B320E1A2-EFBE-4F94-B787-8976560143AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hotel.FixedProvider</RootNamespace>
-    <AssemblyName>HotelFixedProvider</AssemblyName>
+    <RootNamespace>Hotel.ExtendedMethods</RootNamespace>
+    <AssemblyName>HotelExtendedMethods</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -29,12 +29,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Hotel.FixedProvider.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,17 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HotelFixedProvider.cs" />
+    <Compile Include="GameLogicExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HotelEngine\HotelEngine.csproj">
+      <Project>{3f0ae757-e55c-4051-bab1-b7ea84989b2e}</Project>
+      <Name>HotelEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HotelEntities\HotelEntities.csproj">
       <Project>{7b5a67b4-708b-4975-b3c3-324657eb4d45}</Project>
       <Name>HotelEntities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Hotel.FixedProvider.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

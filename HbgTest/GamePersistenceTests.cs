@@ -1,16 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Hotel.FixedProvider;
+using Hotel.JSONProvider;
 using HotelEngine;
-using System.Configuration;
-using Hotel.FixedProvider;
-using Newtonsoft.Json;
 using HotelEntities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using System.Configuration;
 using System.IO;
 
 namespace HbgTest
 {
     [TestClass]
-    public class GamePersistence
+    public class GamePersistenceTests
     {
         [TestMethod]
         public void SaveGameTest()
@@ -32,6 +32,24 @@ namespace HbgTest
             HotelCollection hc = fp.RetrieveHotelCollection();
             string json = JsonConvert.SerializeObject(hc);
             File.WriteAllText(@"c:\temp\hotelCollection.json", json);
+        }
+
+        [TestMethod]
+        public void LoadHotelListFromJSON()
+        {
+            HotelJSONDataProvider hJSON = new HotelJSONDataProvider();
+            HotelCollection hc = hJSON.RetrieveHotelCollection();
+
+            Assert.AreEqual(2, hc.Count);
+        }
+
+        [TestMethod]
+        public void LoadCellListFromJSON()
+        {
+            HotelJSONDataProvider hJSON = new HotelJSONDataProvider();
+            GameCellCollection gcc = hJSON.RetrieveGameCellCollection();
+
+            Assert.AreEqual(3, gcc.Count);
         }
 
     }
