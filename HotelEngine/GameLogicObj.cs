@@ -54,7 +54,7 @@ namespace HotelEngine
 
         public GameLogicObj()
         {
-
+            // develop branch
             /// If game is starting now no persistance object already exists
             /// Otherwise at this point the object is valorized by deserialization
             /// Remarks: strong-named assemblies can only reference other strong-named assemblies.
