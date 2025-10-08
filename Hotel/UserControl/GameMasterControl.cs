@@ -224,10 +224,10 @@ namespace Hotel
 
             switch (cat)
             {
-                case CellActionTypeEnum.CanBuild:
+                case CellActionTypeEnum.CanBuy:
                     BuyPropertyGUI();
                     break;
-                case CellActionTypeEnum.CanBuy:
+                case CellActionTypeEnum.CanBuild:
                     BuildPropertyGUI();
                     break;
                 case CellActionTypeEnum.CanBuyEntrance:

@@ -9,6 +9,6 @@ namespace HotelEntities
         public const int LASTCELL = 31;
         public const int MONEYCELL = 7; // Banca
         public const decimal MONEYPRIZE = 2000;
-        public const int ENTRANCECELL = 2; // Municipio
+        public const int ENTRANCECELL = 26; // Municipio
     }
 }

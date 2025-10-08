@@ -39,6 +39,7 @@ namespace Hotel
             txtMoney.Text = p.Money.ToString();
             txtCurrPos.Text = p.CurrentPosition.ToString();
             chkActive.Checked = (_gameLogic.ActivePlayerId == _playerID);
+            this.BackColor = p.PlaceholderColor.CustomColor;
         }
     }
 }
