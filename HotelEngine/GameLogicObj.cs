@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace HotelEngine
 {
@@ -143,9 +144,6 @@ namespace HotelEngine
 
         private void InitGameScheme()
         {
-
-
-
             #region Getting hotel objects
             // TODO: migliorare
             HotelObj hoPresident = _hotelList.GetHotelByName("President");
@@ -195,8 +193,8 @@ namespace HotelEngine
             _cellsList.Add(new GameCell(30, CellActionTypeEnum.CanBuild, "Safari", null));  // River*/
             #endregion
 
-            /*string JSON = JsonConvert.SerializeObject(_cellsList);
-            File.WriteAllText(@"c:\temp\savedGame.json", JSON);*/
+            string JSON = JsonConvert.SerializeObject(_cellsList);
+            File.WriteAllText(@"c:\temp\savedGame.json", JSON);
         }
 
         public MessageObj ResetGame()
@@ -219,6 +217,12 @@ namespace HotelEngine
             };
         }
 
+        // Pseudocode / Plan:
+        // 1. Gather data to persist by calling MergeDataForSave().
+        // 2. Serialize _persistanceObject to JSON (use Newtonsoft.Json).
+        // 3. Write JSON to a file (c:\temp\GameStatus.json) atomically (File.WriteAllText).
+        // 4. Catch exceptions, log safely (guard against null InnerException) and return appropriate MessageObj.
+        // 5. Avoid leaving open streams by not using a StreamWriter without using/closing.
         public MessageObj SaveGameState()
         {
             // For debug purpose only!! =========================
@@ -228,12 +232,14 @@ namespace HotelEngine
             // ==================================================
             MessageObj resultMessage;
             MergeDataForSave();
-            TextWriter writer = null;
+
             try
             {
-                XmlSerializer ser = new XmlSerializer(typeof(GameLogicPersistence));
-                writer = new StreamWriter(@"c:\temp\GameStatus.xml");
-                ser.Serialize(writer, _persistanceObject);
+                // Serialize to JSON with readable formatting
+                string json = JsonConvert.SerializeObject(_persistanceObject, Formatting.Indented);
+
+                // Write JSON to disk
+                File.WriteAllText(@"c:\temp\GameStatus.json", json);
 
                 resultMessage = new MessageObj()
                 {
@@ -245,7 +251,10 @@ namespace HotelEngine
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message + "\n" + ex.InnerException.Message);
+                // Safe logging: guard against null InnerException
+                string inner = ex.InnerException != null ? "\n" + ex.InnerException.Message : string.Empty;
+                Console.WriteLine(ex.Message + inner);
+
                 resultMessage = new MessageObj()
                 {
                     Summary = "Save game",
@@ -254,23 +263,46 @@ namespace HotelEngine
                     Buttons = MessageButtonsEnum.OK
                 };
             }
-            finally
-            {
-                writer.Close();
-            }
 
             return resultMessage;
         }
 
+        // Pseudocode / Plan:
+        // 1. Define JSON save file path (c:\temp\GameStatus.json).
+        // 2. If file doesn't exist, return an error MessageObj indicating missing save file.
+        // 3. Read entire file content with File.ReadAllText (no stream left open).
+        // 4. Deserialize JSON into GameLogicPersistence using JsonConvert.
+        // 5. If deserialization returns null, treat as an error.
+        // 6. Assign the deserialized object to _persistanceObject and call MergeDataForLoad().
+        // 7. Return a success MessageObj.
+        // 8. Catch exceptions, log safely (guard against null InnerException) and return an error MessageObj.
+
         public MessageObj LoadGameState()
         {
             MessageObj resultMessage;
-            TextReader reader = null;
+            const string path = @"c:\temp\GameStatus.json";
+
             try
             {
-                XmlSerializer ser = new XmlSerializer(typeof(GameLogicPersistence));
-                reader = new StreamReader(@"c:\temp\GameStatus.xml");
-                _persistanceObject = (GameLogicPersistence)ser.Deserialize(reader);
+                if (!File.Exists(path))
+                {
+                    resultMessage = new MessageObj()
+                    {
+                        Summary = "Load game",
+                        Description = "Save file not found: " + path,
+                        Type = MessageTypeEnum.Error,
+                        Buttons = MessageButtonsEnum.OK
+                    };
+                    return resultMessage;
+                }
+
+                string json = File.ReadAllText(path);
+                GameLogicPersistence deserialized = JsonConvert.DeserializeObject<GameLogicPersistence>(json);
+
+                if (deserialized == null)
+                    throw new Exception("Deserialized GameLogicPersistence is null.");
+
+                _persistanceObject = deserialized;
                 MergeDataForLoad();
 
                 resultMessage = new MessageObj()
@@ -283,18 +315,16 @@ namespace HotelEngine
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message + "\n" + ex.InnerException.Message);
+                string inner = ex.InnerException != null ? "\n" + ex.InnerException.Message : string.Empty;
+                Console.WriteLine(ex.Message + inner);
+
                 resultMessage = new MessageObj()
                 {
-                    Summary = "Save game",
+                    Summary = "Load game",
                     Description = "An error occurred while loading game",
                     Type = MessageTypeEnum.Error,
                     Buttons = MessageButtonsEnum.OK
                 };
-            }
-            finally
-            {
-                reader.Close();
             }
 
             return resultMessage;
@@ -527,14 +557,15 @@ namespace HotelEngine
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public int DoTurn(int value)
+        public int DoTurn(int? value)
         {
+            int finalValue = 1;
             try
             {
                 _canSave = false;
                 Player p = GetPlayerByID(ActivePlayerId);
-                value = RollDice(value);
-                MovePlayer(p, value);
+                finalValue = RollDice(value);
+                MovePlayer(p, finalValue);
 
                 // todo azioni
                 // 1. devo ritirare i $$ del giro? FATTO!
@@ -572,8 +603,7 @@ namespace HotelEngine
                 throw new Exception("Exceptin in DoTurn: " + ex.Message + " - " + ex.InnerException);
             }
 
-
-            return value;
+            return finalValue;
         }
 
         /// <summary>

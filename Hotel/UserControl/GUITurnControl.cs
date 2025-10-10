@@ -36,9 +36,9 @@ namespace Hotel
 
         private void btnRoll_Click(object sender, EventArgs e)
         {
-            int DiceValue = 1;
-            if (Dice.Text != string.Empty)
-                DiceValue = Convert.ToInt32(Dice.Text);
+            int? DiceValue = 1;
+            if (Dice.Text == string.Empty)
+                DiceValue = null;// Convert.ToInt32(Dice.Text);
 
             //if (DiceValue != 6)
             //{
